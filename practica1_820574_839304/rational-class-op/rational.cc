@@ -105,12 +105,13 @@ bool Rational::operator>(const Rational& b) const
 
 // Entrada/salida
 
-void operator<<(std::ostream& os,const Rational& r)
+std::ostream& operator<<(std::ostream& os,const Rational& r)
 {
 	os << r.numerador << "/" << r.denominador;
+	return os;
 }
 
-void operator>>(std::istream& is, Rational& r)
+std::istream& operator>>(std::istream& is, Rational& r)
 {
 	int num, den;
 	char barra;
@@ -121,6 +122,8 @@ void operator>>(std::istream& is, Rational& r)
 	r.numerador = num;
 	r.denominador = den;
 	r.reduce();
+
+	return is;
 }
 
 

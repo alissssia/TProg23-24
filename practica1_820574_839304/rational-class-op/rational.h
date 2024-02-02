@@ -37,8 +37,8 @@ public:
 	bool operator>(const Rational& b) const;
 
 	// Friends, en su caso
-	friend void operator<<(std::ostream& os,const Rational& r);
-	friend void operator>>(std::istream& is,Rational& r);
+	friend std::ostream& operator<<(std::ostream& os,const Rational& r);
+	friend std::istream& operator>>(std::istream& is,Rational& r);
 
 };
 
@@ -49,5 +49,5 @@ Rational operator/(const Rational& a,const Rational& b);
 
 // Entrada/salida
 
-void operator<<(std::ostream& os,const Rational& r);
-void operator>>(std::istream& is,Rational& r);
+std::ostream& operator<<(std::ostream& os,const Rational& r);
+std::istream& operator>>(std::istream& is,Rational& r);
