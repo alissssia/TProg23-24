@@ -1,3 +1,9 @@
+/*
+	Fichero: rational-class/rational.h
+	Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+	Fecha: 2/2/2024
+*/
+
 #pragma once
 
 #include <iostream>

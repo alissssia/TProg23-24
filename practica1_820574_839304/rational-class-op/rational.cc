@@ -1,3 +1,9 @@
+/*
+	Fichero: rational-class-op/rational.cc
+	Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+	Fecha: 2/2/2024
+*/
+
 #include "rational.h"
 
 // Auxiliares
