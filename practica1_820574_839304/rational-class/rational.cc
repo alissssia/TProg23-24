@@ -20,7 +20,12 @@ void Rational::reduce()
 	int num = this->numerador;
 	int den = this->denominador;
 
-	int min = mcd(num, den);
+	if (den < 0){
+		den = den * -1;
+		num = num * -1;
+	}
+
+	int min = mcd(abs(num), abs(den));
 	
 	this->numerador = num / min;
 	this->denominador = den / min;
@@ -44,8 +49,12 @@ Rational::Rational(int num, int den)
 // Entrada/salida
 
 void Rational::write(std::ostream& os) const
-{
-	os << this->numerador << "/" << this->denominador;
+{	
+	if (this->denominador == 1){
+		os << this->numerador;
+	} else {
+		os << this->numerador << "/" << this->denominador;
+	}
 }
 
 void Rational::read(std::istream& is)
@@ -54,11 +63,14 @@ void Rational::read(std::istream& is)
 	char barra;
 	is >> num >> barra >> den;
 
-	if (den == 0) exit(1);
-
-	this->numerador = num;
-	this->denominador = den;
-	this->reduce();
+	if (den == 0) {
+		this->numerador = 0;
+		this->denominador = 1;	
+	} else {
+		this->numerador = num;
+		this->denominador = den;
+		this->reduce();	
+	}
 }
 
 // Operaciones aritmeticas
@@ -95,14 +107,18 @@ Rational Rational::mul(const Rational& b) const
 
 Rational Rational::div(const Rational& b) const
 {	
-	if (b.numerador == 0) exit(1);
-	
-	int rnum, rden;
-	rnum = this->numerador * b.denominador;
-	rden = this->denominador * b.numerador;
+	if(b.numerador == 0){
+		Rational resultado;
+		return resultado;
+	} else {
+		int rnum, rden;
+		rnum = this->numerador * b.denominador;
+		rden = this->denominador * b.numerador;
 
-	Rational resultado(rnum, rden);
-	return resultado;
+		Rational resultado(rnum, rden);
+		return resultado;
+	}
+	
 }
 
 // Operaciones logicas

@@ -21,7 +21,12 @@ void reduce(Rational& r)
 	int num = r.numerador;
 	int den = r.denominador;
 
-	int min = mcd(num, den);
+	if (den < 0){
+		den = den * -1;
+		num = num * -1;
+	}
+
+	int min = mcd(abs(num), abs(den));
 	
 	r.numerador = num / min;
 	r.denominador = den / min;
@@ -46,7 +51,11 @@ void init(Rational& r,int num, int den)
 
 void write(std::ostream& os, const Rational& r)
 {
-	os << r.numerador << "/" << r.denominador;
+	if(r.denominador == 1){
+		os << r.numerador;
+	} else {
+		os << r.numerador << "/" << r.denominador;
+	}
 }
 
 void read(std::istream& is, Rational& r)
@@ -55,9 +64,11 @@ void read(std::istream& is, Rational& r)
 	char barra;
 	is >> num >> barra >> den;
 
-	if (den == 0) exit(1);
-	
-	init(r, num, den);
+	if (den == 0) {
+		init(r);
+	} else {
+		init(r, num, den);
+	}
 }
 
 // Operaciones aritmeticas
@@ -97,14 +108,17 @@ Rational mul(const Rational& r1, const Rational& r2)
 
 Rational div(const Rational& r1, const Rational& r2)
 {
-	if (r2.numerador == 0) exit(1);
-	
-	int rnum, rden;
-	rnum = r1.numerador * r2.denominador;
-	rden = r1.denominador * r2.numerador;
-	
 	Rational resultado;
-	init(resultado, rnum, rden);
+
+	if (r2.numerador == 0) {
+		init(resultado);
+	} else {
+		int rnum, rden;
+		rnum = r1.numerador * r2.denominador;
+		rden = r1.denominador * r2.numerador;
+		init(resultado, rnum, rden);
+	}
+	
 	return resultado;
 }
 

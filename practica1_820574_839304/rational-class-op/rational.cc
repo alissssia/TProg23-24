@@ -5,6 +5,7 @@
 */
 
 #include "rational.h"
+#include <cmath>
 
 // Auxiliares
 
@@ -19,7 +20,12 @@ void Rational::reduce()
 	int num = this->numerador;
 	int den = this->denominador;
 
-	int min = mcd(num, den);
+	if (den < 0){
+		den = den * -1;
+		num = num * -1;
+	}
+
+	int min = mcd(std::abs(num), std::abs(den));
 	
 	this->numerador = num / min;
 	this->denominador = den / min;
@@ -74,14 +80,18 @@ Rational operator*(const Rational& a, const Rational& b)
 
 Rational operator/(const Rational& a,const Rational& b)
 {
-	if (b.numerador == 0) exit(1);
-	
-	int rnum, rden;
-	rnum = a.numerador * b.denominador;
-	rden = a.denominador * b.numerador;
+	if (b.numerador == 0) {
+		Rational resultado;
+		return resultado;		
+	} else {
 
-	Rational resultado(rnum, rden);
-	return resultado;
+		int rnum, rden;
+		rnum = a.numerador * b.denominador;
+		rden = a.denominador * b.numerador;
+
+		Rational resultado(rnum, rden);
+		return resultado;
+	}
 }
 
 // Operadores logicos
@@ -113,7 +123,11 @@ bool Rational::operator>(const Rational& b) const
 
 std::ostream& operator<<(std::ostream& os,const Rational& r)
 {
-	os << r.numerador << "/" << r.denominador;
+	if(r.denominador == 1){
+		os << r.numerador;
+	} else {
+		os << r.numerador << "/" << r.denominador;
+	}
 	return os;
 }
 
@@ -123,11 +137,11 @@ std::istream& operator>>(std::istream& is, Rational& r)
 	char barra;
 	is >> num >> barra >> den;
 
-	if(den == 0) exit(1);
-	
-	r.numerador = num;
-	r.denominador = den;
-	r.reduce();
+	if (den == 0) {
+		r = Rational();
+	} else {
+		r = Rational(num, den);
+	}
 
 	return is;
 }
