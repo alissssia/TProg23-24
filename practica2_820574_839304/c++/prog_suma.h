@@ -2,7 +2,7 @@
 
 using namespace std;
 
-class Programa
+class prog_suma : public Programa
 {        
     public:
         Programa();
