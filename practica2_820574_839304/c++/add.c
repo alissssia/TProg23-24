@@ -1,5 +1,8 @@
 #include "add.h"
 
+add::add() {
+}
+
 void add::ejecutar(PilaInts &pila, int &pc) {
     int a, b;
     pila.cima(a);
@@ -7,4 +10,8 @@ void add::ejecutar(PilaInts &pila, int &pc) {
     pila.cima(b);
     pila.extraer();
     pila.insertar(a + b);
+}
+
+string add::nombrar() {
+    return "add";
 }

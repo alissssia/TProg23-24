@@ -3,12 +3,11 @@
         {
             "name": "windows-gcc-x86",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/MinGW/include/c++/9",  // Ruta correcta para los encabezados de GCC en MinGW
+                "${workspaceFolder}/**",  
                 "C:/MinGW/include" 
             ],
             "compilerPath": "C:/MinGW/bin/gcc.exe",
-            "cStandard": "c11",           // Establece la versión de C estándar
+            "cStandard": "c11",           
             "cppStandard": "c++17",
             "intelliSenseMode": "windows-gcc-x86",
             "compilerArgs": [

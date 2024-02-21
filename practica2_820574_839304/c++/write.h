@@ -1,8 +1,8 @@
 #include "instruccion.h"
 
-class add : public Instruccion {
+class Write : public Instruccion {
     public:
-        add();
+        Write();
         void ejecutar(PilaInts &pila, int &pc);
         string nombrar();
-}
+};
