@@ -1,6 +1,7 @@
 #include "write.h"
 
 Write::Write() {
+    nombre = "write";
 }
 
 void Write::ejecutar(PilaInts &pila, int &pc) {
@@ -11,5 +12,5 @@ void Write::ejecutar(PilaInts &pila, int &pc) {
 }
 
 string Write::nombrar() {
-    return "write";
+    return nombre;
 }

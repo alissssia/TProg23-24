@@ -1,6 +1,7 @@
 #include "read.h"
 
 Read::read() {
+    nombre = "read";
 }
 
 void Read::ejecutar(PilaInts &pila, int &pc) {
@@ -10,5 +11,5 @@ void Read::ejecutar(PilaInts &pila, int &pc) {
 }
 
 string Read::nombrar() {
-    return "read";
+    return nombre;
 }

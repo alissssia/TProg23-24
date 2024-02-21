@@ -1,6 +1,7 @@
 #include "add.h"
 
 add::add() {
+    nombre = "add";
 }
 
 void add::ejecutar(PilaInts &pila, int &pc) {
@@ -13,5 +14,5 @@ void add::ejecutar(PilaInts &pila, int &pc) {
 }
 
 string add::nombrar() {
-    return "add";
+    return nombre;
 }
