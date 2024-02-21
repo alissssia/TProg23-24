@@ -5,7 +5,7 @@ using namespace std;
 class prog_suma : public Programa
 {        
     public:
-        Programa();
+        prog_suma();
         
         void run();
         void listar();
