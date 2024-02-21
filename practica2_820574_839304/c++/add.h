@@ -1,8 +1,13 @@
 #include "instruccion.h"
 
-class add : public Instruccion {
+using namespace std;
+
+class Add : public Instruccion 
+{
+    private:
+        string nombre;
     public:
-        add();
+        void add();
         void ejecutar(PilaInts &pila, int &pc);
         string nombrar();
-}
+};

@@ -1,4 +1,5 @@
 #include "write.h"
+#include <iostream>
 
 Write::Write() {
     nombre = "write";
@@ -6,7 +7,7 @@ Write::Write() {
 
 void Write::ejecutar(PilaInts &pila, int &pc) {
     int a;
-    pila.cima(a);
+    a = pila.cima();
     pila.extraer();
     cout << a << endl;
 }

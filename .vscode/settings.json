@@ -80,6 +80,12 @@
     "ostream": "cpp",
     "stdexcept": "cpp",
     "streambuf": "cpp",
-    "typeinfo": "cpp"
-  }
+    "typeinfo": "cpp",
+    "pila_ints.h": "c",
+    "add.h": "c",
+    "string.h": "c",
+    "instruccion.h": "c",
+    "string": "c"
+  },
+  "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe"
 }

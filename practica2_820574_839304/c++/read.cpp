@@ -1,6 +1,7 @@
 #include "read.h"
+#include <iostream>
 
-Read::read() {
+Read::Read() {
     nombre = "read";
 }
 

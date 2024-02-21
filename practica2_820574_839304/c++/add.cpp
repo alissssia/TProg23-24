@@ -1,18 +1,18 @@
 #include "add.h"
 
-add::add() {
+Add::Add() {
     nombre = "add";
 }
 
-void add::ejecutar(PilaInts &pila, int &pc) {
+void Add::ejecutar(PilaInts &pila, int &pc) {
     int a, b;
-    pila.cima(a);
+    a = pila.cima();
     pila.extraer();
-    pila.cima(b);
+    b = pila.cima();
     pila.extraer();
     pila.insertar(a + b);
 }
 
-string add::nombrar() {
+string Add::nombrar() {
     return nombre;
 }

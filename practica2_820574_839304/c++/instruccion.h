@@ -5,7 +5,7 @@ using namespace std;
 
 class Instruccion
 {        
-    private:
+    protected:
         string nombre;
     public:
         void virtual ejecutar(PilaInts &pila, int &pc) = 0;
