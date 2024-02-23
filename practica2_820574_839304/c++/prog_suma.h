@@ -2,11 +2,8 @@
 
 using namespace std;
 
-class prog_suma : public Programa
+class Prog_Suma : public Programa
 {        
     public:
-        prog_suma();
-        
-        void run();
-        void listar();
+        Prog_Suma();
 };

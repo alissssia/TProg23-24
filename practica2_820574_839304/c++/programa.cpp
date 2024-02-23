@@ -1,29 +1,26 @@
 #include "programa.h"
 
-// HAY QUE REPENSARLO
+Programa::Programa(int _num_inst)
+    : num_inst(_num_inst), instrucciones(new InstruccionPt[_num_inst])
+{
+}
+
 
 void Programa::run()
 {
-    /*
+
     PilaInts pila;
     int pc = 0;
 
-    int num_inst = instrucciones.size();
-
-
-    while(pc <= num_inst){
+    while(pc < num_inst){
         instrucciones[pc]->ejecutar(pila, pc);
     }
-    */
 }
 
 void Programa::listar()
-{   
-    /*
-    int num_inst = instrucciones.size();
-    // añadir numero de pc antes de nombrar
-    while(pc <= num_inst){
-        instrucciones[pc]->nombrar();
+{
+    for(int it = 0; it < num_inst; it++)
+    {
+        instrucciones[it]->nombrar();
     }
-    */
 }

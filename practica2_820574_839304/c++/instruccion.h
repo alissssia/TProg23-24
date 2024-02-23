@@ -3,11 +3,12 @@
 
 using namespace std;
 
+
 class Instruccion
 {        
     protected:
         string nombre;
     public:
-        void virtual ejecutar(PilaInts &pila, int &pc) = 0;
+        void virtual ejecutar(PilaInts& pila, int &pc) = 0;
         string virtual nombrar() = 0;
 };

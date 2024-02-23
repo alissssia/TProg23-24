@@ -7,11 +7,14 @@ using InstruccionPt = Instruccion*;
 
 class Programa
 {        
-    private:
+    protected:
         InstruccionPt* instrucciones;
-        PilaInts pila;
+        int num_inst;
+
+        Programa(int _num_inst);
 
     public:
+        
         void run();
         void listar();
 };
