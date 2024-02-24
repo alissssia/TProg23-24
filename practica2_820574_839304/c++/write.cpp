@@ -6,7 +6,7 @@ Write::Write() {
 }
 
 void Write::ejecutar(PilaInts &pila, int &pc) {
-    cout << pila.cima();
+    cout << pila.cima() << endl;
     pila.extraer();
     pc++;
 }
