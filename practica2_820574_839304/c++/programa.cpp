@@ -1,10 +1,9 @@
 #include "programa.h"
 
 Programa::Programa(int _num_inst)
-    : num_inst(_num_inst), instrucciones(new InstruccionPt[_num_inst])
+    : num_inst(_num_inst), instrucciones(new Instruccion*[_num_inst])
 {
 }
-
 
 void Programa::run()
 {

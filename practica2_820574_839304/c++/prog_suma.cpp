@@ -3,8 +3,6 @@
 #include "write.h"
 #include "add.h"
 
-using InstruccionPt = Instruccion*;
-
 Prog_Suma::Prog_Suma()
     : Programa(4)
 {   
@@ -12,4 +10,4 @@ Prog_Suma::Prog_Suma()
     instrucciones[1] = new Read();
     instrucciones[2] = new Add();
     instrucciones[3] = new Write();
-}
+};

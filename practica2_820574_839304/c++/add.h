@@ -6,8 +6,9 @@ class Add : public Instruccion
 {
     private:
         string nombre;
+        
     public:
-        void add();
+        Add();
         void ejecutar(PilaInts &pila, int &pc);
         string nombrar();
 };

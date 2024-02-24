@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Documents/GitHub/TProg23-24/practica1_820574_839304/rational-class-op",
-      "program": "c:/Documents/GitHub/TProg23-24/practica1_820574_839304/rational-class-op/build/Debug/outDebug",
+      "cwd": "c:/Documents/GitHub/TProg23-24/practica2_820574_839304/c++",
+      "program": "c:/Documents/GitHub/TProg23-24/practica2_820574_839304/c++/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
