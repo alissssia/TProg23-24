@@ -11,6 +11,9 @@ void Jump_If::ejecutar(PilaInts &pila, int &pc) {
     if(a >= 0)
     {
         pc = num;
+    } else 
+    {
+        pc++;
     }
 }
 

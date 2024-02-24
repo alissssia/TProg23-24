@@ -14,6 +14,7 @@ void Programa::run()
 
     while(pc < num_inst){
         instrucciones[pc]->ejecutar(pila, pc);
+        cout << "-- " << pila.cima() << " --" << endl;
     }
 }
 
