@@ -4,7 +4,7 @@
 #include <iostream>
 
 int main(){
-    /*Prog_Suma suma_exe;
+    Prog_Suma suma_exe;
     suma_exe.listar();
     suma_exe.run();
     
@@ -15,7 +15,7 @@ int main(){
     cuenta_atras_exe.run();
 
     cout << endl;
-    */
+    
     Prog_Factorial factorial_exe;
     factorial_exe.listar();
     factorial_exe.run();

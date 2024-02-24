@@ -11,8 +11,8 @@ void Swap::ejecutar(PilaInts &pila, int &pc) {
     b = pila.cima();
     pila.extraer();
 
-    pila.insertar(b);
     pila.insertar(a);
+    pila.insertar(b);
     pc++;
 }
 

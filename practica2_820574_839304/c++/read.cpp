@@ -7,6 +7,7 @@ Read::Read() {
 
 void Read::ejecutar(PilaInts &pila, int &pc) {
     int a;
+    cout << "? ";
     cin >> a;
     pila.insertar(a);
     pc++;

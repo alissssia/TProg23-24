@@ -12,9 +12,9 @@ void Programa::run()
     PilaInts pila;
     int pc = 0;
 
-    while(pc < num_inst){
+    while(pc < num_inst)
+    {
         instrucciones[pc]->ejecutar(pila, pc);
-        cout << "-- " << pila.cima() << " --" << endl;
     }
 }
 
