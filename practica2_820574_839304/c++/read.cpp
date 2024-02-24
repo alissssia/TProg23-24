@@ -9,6 +9,7 @@ void Read::ejecutar(PilaInts &pila, int &pc) {
     int a;
     cin >> a;
     pila.insertar(a);
+    pc++;
 }
 
 string Read::nombrar() {

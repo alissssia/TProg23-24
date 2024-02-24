@@ -6,10 +6,9 @@ Write::Write() {
 }
 
 void Write::ejecutar(PilaInts &pila, int &pc) {
-    int a;
-    a = pila.cima();
+    cout << pila.cima();
     pila.extraer();
-    cout << a << endl;
+    pc++;
 }
 
 string Write::nombrar() {

@@ -11,6 +11,7 @@ void Add::ejecutar(PilaInts &pila, int &pc) {
     b = pila.cima();
     pila.extraer();
     pila.insertar(a + b);
+    pc++;
 }
 
 string Add::nombrar() {

@@ -1,5 +1,6 @@
 #include "pila_ints.h"
 
+PilaInts::PilaInts(){}
 
 void PilaInts::insertar(int a)
 {
