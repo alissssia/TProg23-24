@@ -3,21 +3,26 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class Programa {
-    protected Pila_ints pila;
     protected Instruccion[] instrucciones;
+    protected int num_instr;
 
-    Programa(){
+    Programa(int _num_instr){
+        num_instr = _num_instr;
+        instrucciones = new Instruccion[num_instr];
     }
 
     public void run() {
-        // falta la lista
-        Queue<Instruccion> lista = new LinkedList<Instruccion>();
-
+        Queue<Integer> cola = new LinkedList<Integer>();
+        Pila_ints pila = new Pila_ints();
+        int[] pc = {0};
+        while (pc[0] < num_instr) {
+            instrucciones[pc[0]].ejecutar(pila, pc);
+        }
     }
 
     public void listar() {
         for (int i = 0; i < instrucciones.length; i++) {
-            System.out.println(i + " " + instrucciones[i].listar());
+            System.out.println(i + " " + instrucciones[i].nombrar() + "\n");
         }
     }
 }

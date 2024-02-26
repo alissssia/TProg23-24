@@ -1,14 +1,19 @@
 package practica2_820574_839304.java;
 
-public class Read implements Instruccion {
-    private String nombre;
+import practica2_820574_839304.java.Instruccion;
+import practica2_820574_839304.java.Pila_ints;
+import java.util.Scanner;
+
+public class Read extends Instruccion {
     Read(){
         nombre = "read";
     }
-    public void ejecutar(){
-            
-    }
-    public String listar(){
-        return nombre;
+    public void ejecutar(Pila_ints pila, int[] pc){
+        Scanner scanner = new Scanner(System.in);
+        int a;
+        System.out.print("? ");
+        a = scanner.nextInt();
+        pila.insertar(a);
+        pc[0]++;
     }
 }

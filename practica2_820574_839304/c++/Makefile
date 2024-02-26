@@ -17,7 +17,7 @@ edit:
 	geany -s *.h *.cpp &
 
 clean:
-	@del $(PROG).exe
+	rm $(PROG)
 
 programa.o: programa.cpp programa.h
 pila_ints.o: pila_ints.cpp pila_ints.h
