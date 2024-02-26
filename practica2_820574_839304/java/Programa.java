@@ -2,7 +2,7 @@ package practica2_820574_839304.java;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Programa {
+abstract class Programa {
     protected Instruccion[] instrucciones;
     protected int num_instr;
 

@@ -11,6 +11,7 @@ public class Write extends Instruccion{
         int a;
         a = pila.extraer();
         System.out.print(a);
+        System.out.println();
         pc[0]++;
     }
 }
