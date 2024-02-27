@@ -1,3 +1,9 @@
+/*
+* Fichero: prog_factorial.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "prog_factorial.h"
 #include "read.h"
 #include "write.h"

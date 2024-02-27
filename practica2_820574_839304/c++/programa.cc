@@ -1,3 +1,9 @@
+/*
+* Fichero: programa.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "programa.h"
 #include "iostream"
 
@@ -9,7 +15,7 @@ Programa::Programa(int _num_inst)
 void Programa::run()
 {
 
-    PilaInts pila;
+    stack<int> pila;
     int pc = 0;
 
     while(pc < num_inst)

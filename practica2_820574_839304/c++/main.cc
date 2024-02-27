@@ -1,3 +1,9 @@
+/*
+* Fichero: main.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "prog_suma.h"
 #include "prog_cuenta_atras.h"
 #include "prog_factorial.h"

@@ -1,3 +1,9 @@
+/*
+* Fichero: prog_cuenta_atras.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "prog_cuenta_atras.h"
 #include "read.h"
 #include "write.h"

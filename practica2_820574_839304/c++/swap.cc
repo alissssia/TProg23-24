@@ -1,18 +1,24 @@
+/*
+* Fichero: swap.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "swap.h"
 
 Swap::Swap() {
     nombre = "swap";
 }
 
-void Swap::ejecutar(PilaInts &pila, int &pc) {
+void Swap::ejecutar(stack<int> &pila, int &pc) {
     int a, b;
-    a = pila.cima();
-    pila.extraer();
-    b = pila.cima();
-    pila.extraer();
+    a = pila.top();
+    pila.pop();
+    b = pila.top();
+    pila.pop();
 
-    pila.insertar(a);
-    pila.insertar(b);
+    pila.push(a);
+    pila.push(b);
     pc++;
 }
 

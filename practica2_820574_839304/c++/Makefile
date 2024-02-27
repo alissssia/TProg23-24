@@ -1,3 +1,8 @@
+# Fichero: add.cc
+# Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+# Fecha: 27/02/2023
+# Para compilar, ejecutar con 'make', limpiar con 'make clean'
+
 PROG:=main
 SRCS:=pila_ints.cc programa.cc prog_suma.cc prog_cuenta_atras.cc prog_factorial.cc instruccion.cc add.cc read.cc write.cc push.cc dup.cc jump_if.cc mul.cc swap.cc over.cc main.cc
 

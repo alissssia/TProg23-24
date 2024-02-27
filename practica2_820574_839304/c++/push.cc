@@ -1,3 +1,9 @@
+/*
+* Fichero: push.cc
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 27/02/2023
+*/
+
 #include "push.h"
 
 Push::Push(int _num) {
@@ -5,8 +11,8 @@ Push::Push(int _num) {
     num = _num;
 }
 
-void Push::ejecutar(PilaInts &pila, int &pc) {
-    pila.insertar(num);
+void Push::ejecutar(stack<int> &pila, int &pc) {
+    pila.push(num);
     pc++;
 }
 
