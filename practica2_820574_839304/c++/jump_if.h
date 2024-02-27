@@ -16,8 +16,9 @@ class Jump_If : public Instruccion {
         // Constructor: el numero pasado por parametro sera guardado en el atributo 'num'
         Jump_If(int _num);
 
+
         // Metodo: extrae el primer elemento de la pila
         //      si es mayor o igual que cero, modifica el pc igual que "valor"
         //      si es menor que cero, aumenta el pc en 1
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 };

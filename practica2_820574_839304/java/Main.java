@@ -2,6 +2,7 @@
 * Fichero: Main.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
 * Fecha: 27/02/2023
+* Comentarios: javac Main.java para compilar, java Main para ejecutar, rm *.class para borrar los .class
 */
 
 // Clase principal
@@ -15,11 +16,11 @@ public class Main {
 
         p1.listar();
         p1.run();
-        System.out.println("\n");
+        System.out.print("\n");
 
         p2.listar();
         p2.run();
-        System.out.println("\n");
+        System.out.print("\n");
 
 
         p3.listar();

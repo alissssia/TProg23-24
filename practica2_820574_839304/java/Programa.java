@@ -32,5 +32,6 @@ abstract class Programa {
         for (int i = 0; i < instrucciones.length; i++) {
             System.out.println(i + " " + instrucciones[i].nombrar());
         }
+        System.out.println();
     }
 }

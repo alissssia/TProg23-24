@@ -12,6 +12,12 @@ Programa::Programa(int _num_inst)
 {
 }
 
+Programa::~Programa() {
+    for(int i = 0; i < num_inst; i++)
+        delete instrucciones[i];
+    delete instrucciones;
+}
+
 void Programa::run()
 {
 

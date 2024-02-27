@@ -12,5 +12,5 @@ class Push : public Instruccion {
         Push(int _num);
 
         // Metodo: introduce 'valor' en la pila y aumenta en 1 el pc
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 };

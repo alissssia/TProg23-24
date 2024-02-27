@@ -16,6 +16,9 @@ class Add : public Instruccion
 
         Add();
 
+        // Destructor
+        ~Add();
+
         // Metodo: Extrae los dos primeros elementos de la pila, inserta su suma y aumenta el pc en 1
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 };

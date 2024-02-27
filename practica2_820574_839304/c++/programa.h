@@ -17,7 +17,8 @@ class Programa
         int num_inst;
     
     public:
-        Programa(int _num_inst);        
+        Programa(int _num_inst);      
+        virtual ~Programa();  
         void run();
         void listar();
 };

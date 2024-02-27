@@ -12,6 +12,6 @@ class Swap : public Instruccion
 
         // Metodo: extrae los dos primeros elementos de la pila y los vuelve a introducir
         //         en orden inverso
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 
 };

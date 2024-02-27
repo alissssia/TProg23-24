@@ -22,6 +22,7 @@ class Instruccion
 
         // Constructor
         Instruccion();
+
         
     public:
         // Metodo: virtual puro, ejecuta las acciones necesarias sobre la pila o el pc

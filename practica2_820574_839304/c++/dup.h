@@ -13,7 +13,8 @@ class Dup : public Instruccion {
         // Constructor: inicializa el nombre de la instruccion
         Dup();
 
+
         // Metodo: Extrae el primer elemento de la pila, lo inserta dos veces y aumenta el pc en 1
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 
 };

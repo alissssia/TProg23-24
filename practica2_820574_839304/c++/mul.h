@@ -17,5 +17,5 @@ class Mul : public Instruccion
 
         // Metodo: Extrae los dos primeros elementos de la pila, 
         //          inserta su producto y aumenta en 1 el pc
-        void ejecutar(stack<int> &pila, int &pc);
+        void ejecutar(stack<int> &pila, int &pc) override;
 };
