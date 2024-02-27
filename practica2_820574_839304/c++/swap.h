@@ -2,13 +2,16 @@
 
 using namespace std;
 
+// Clase heredada de Instruccion
 class Swap : public Instruccion
 {
-    private:
-        string nombre;
-        
     public:
+        // Constructor: inicializa el nombre de la instruccion
         Swap();
-        void ejecutar(PilaInts &pila, int &pc);
+
+        // Metodo: extrae los dos primeros elementos de la pila y los vuelve a introducir
+        //         en orden inverso
+        void ejecutar(stack<int> &pila, int &pc);
+
         string nombrar();
 };

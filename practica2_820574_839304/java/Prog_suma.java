@@ -4,9 +4,11 @@
 * Fecha: 27/02/2023
 */
 
-// Clase heredada de Programa
-// Ejecuta una serie de instrucciones que muestran por pantalla la
-// suma de dos numeros introducidos por el usuario
+/* 
+* Clase heredada de Programa
+* Ejecuta una serie de instrucciones que muestran por pantalla la
+* suma de dos numeros introducidos por el usuario
+*/
 public class Prog_suma extends Programa {
     public Prog_suma(){
         super(4);

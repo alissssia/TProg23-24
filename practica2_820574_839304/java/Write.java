@@ -5,13 +5,14 @@
 */
 import java.util.Stack;
 
+// Clase heredada de Instruccion
 public class Write extends Instruccion{
     // Constructor: inicializa el nombre de la instruccion
     Write(){
         nombre = "write";
     }
 
-    // Metodo: extrae y escribe por pantalla el primer elemento de la pila, 
+    // Metodo: extrae y escribe por pantalla el primer elemento de la pila,
     //         y aumenta en 1 el pc
     public void ejecutar(Stack<Integer> pila, int[] pc){
         int a;

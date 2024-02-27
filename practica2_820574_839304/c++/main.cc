@@ -9,12 +9,14 @@
 #include "prog_factorial.h"
 #include <iostream>
 
+// Programa principal
+// Lista y ejecuta los 3 programas implementados, uno seguido de otro
 int main(){
     Prog_Suma suma_exe;
     suma_exe.listar();
     suma_exe.run();
     
-    cout << endl;
+    cout <<endl;
 
     Prog_Cuenta_Atras cuenta_atras_exe;
     cuenta_atras_exe.listar();

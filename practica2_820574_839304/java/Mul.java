@@ -12,7 +12,8 @@ public class Mul extends Instruccion{
         this.nombre = "mul";
     }
 
-    // Metodo: Extrae los dos primeros elementos de la pila, inserta su producto y aumenta en 1 el pc
+    // Metodo: Extrae los dos primeros elementos de la pila, 
+    //          inserta su producto y aumenta en 1 el pc
     public void ejecutar(Stack<Integer> pila, int[] pc){
         int a, b;
         a = pila.pop();

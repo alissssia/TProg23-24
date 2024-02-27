@@ -4,7 +4,7 @@
 # Para compilar, ejecutar con 'make', limpiar con 'make clean'
 
 PROG:=main
-SRCS:=pila_ints.cc programa.cc prog_suma.cc prog_cuenta_atras.cc prog_factorial.cc instruccion.cc add.cc read.cc write.cc push.cc dup.cc jump_if.cc mul.cc swap.cc over.cc main.cc
+SRCS:= programa.cc prog_suma.cc prog_cuenta_atras.cc prog_factorial.cc instruccion.cc add.cc read.cc write.cc push.cc dup.cc jump_if.cc mul.cc swap.cc over.cc main.cc
 
 CXX:= g++ -O2
 
@@ -25,7 +25,6 @@ clean:
 	rm $(PROG) $(OBJS).o main.o
 
 programa.o: programa.cc programa.h
-pila_ints.o: pila_ints.cc pila_ints.h
 prog_suma.o: prog_suma.cc prog_suma.h
 prog_cuenta_atras.o: prog_cuenta_atras.cc prog_cuenta_atras.h
 prog_factorial.o: prog_factorial.cc prog_factorial.h

@@ -9,16 +9,16 @@ import java.util.Stack;
 public class Add extends Instruccion{
     // Constructor: inicializa el nombre de la instruccion
     Add(){
-        nombre = "add";     
+        nombre = "add";
     }
 
     // Metodo: Extrae los dos primeros elementos de la pila, inserta su suma y aumenta el pc en 1
     public void ejecutar(Stack<Integer> pila, int[] pc){
         int a, b;
         a = pila.pop();
-        b = pila.pop();     // Saca los dos elementos de la pila
+        b = pila.pop();
 
-        pila.push(a + b);   // Apila la suma
-        pc[0]++;            // Aumenta en 1 el pc
+        pila.push(a + b);
+        pc[0]++;
     }
 }

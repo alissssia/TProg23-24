@@ -6,6 +6,7 @@
 import java.util.Scanner;
 import java.util.Stack;
 
+// Clase heredada de Instruccion
 public class Read extends Instruccion {
     // Constructor: inicializa el nombre de la instruccion
     Read(){
