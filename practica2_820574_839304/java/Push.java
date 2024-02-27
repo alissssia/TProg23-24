@@ -1,7 +1,9 @@
-package practica2_820574_839304.java;
-
-import practica2_820574_839304.java.Instruccion;
-import practica2_820574_839304.java.Pila_ints;
+/*
+* Fichero: Push.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
+import java.util.Stack;
 
 public class Push extends Instruccion{
     private int valor;
@@ -9,8 +11,8 @@ public class Push extends Instruccion{
         nombre = "push";
         valor = num;
     }
-    public void ejecutar(Pila_ints pila, int[] pc){
-        pila.insertar(valor);
+    public void ejecutar(Stack<Integer> pila, int[] pc){
+        pila.push(valor);
         pc[0]++;
     }
 }

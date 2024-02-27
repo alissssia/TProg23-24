@@ -1,7 +1,9 @@
-package practica2_820574_839304.java;
-
-import practica2_820574_839304.java.Instruccion;
-import practica2_820574_839304.java.Pila_ints;
+/*
+* Fichero: Jump_if.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
+import java.util.Stack;
 
 public class Jump_If extends Instruccion{
     private int valor;
@@ -9,8 +11,8 @@ public class Jump_If extends Instruccion{
         nombre = "jump_if";
         valor = num;
     }
-    public void ejecutar(Pila_ints pila, int[] pc){
-        int a = pila.extraer();
+    public void ejecutar(Stack<Integer> pila, int[] pc){
+        int a = pila.pop();
         if (a >= 0) {
             pc[0] = valor;
         } else {

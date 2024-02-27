@@ -1,4 +1,8 @@
-package practica2_820574_839304.java;
+/*
+* Fichero: Prog_factorial.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
 
 public class Prog_factorial extends Programa {
     public Prog_factorial() {

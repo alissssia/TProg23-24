@@ -1,20 +1,22 @@
-package practica2_820574_839304.java;
-
-import practica2_820574_839304.java.Instruccion;
-import practica2_820574_839304.java.Pila_ints;
+/*
+* Fichero: Over.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
+import java.util.Stack;
 
 public class Over extends Instruccion{
     Over(){
         nombre = "over";
     }
-    public void ejecutar(Pila_ints pila, int[] pc){
+    public void ejecutar(Stack<Integer> pila, int[] pc){
         int a, b;
-        a = pila.extraer();
-        b = pila.extraer();
+        a = pila.pop();
+        b = pila.pop();
 
-        pila.insertar(b);
-        pila.insertar(a);
-        pila.insertar(b);
+        pila.push(b);
+        pila.push(a);
+        pila.push(b);
         pc[0]++;
     }
 }

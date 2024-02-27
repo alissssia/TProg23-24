@@ -1,18 +1,20 @@
-package practica2_820574_839304.java;
-
-import practica2_820574_839304.java.Instruccion;
-import practica2_820574_839304.java.Pila_ints;
+/*
+* Fichero: Swap.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
+import java.util.Stack;
 
 public class Swap extends Instruccion{
     Swap(){
         nombre = "swap";
     }
-    public void ejecutar(Pila_ints pila, int[] pc){
+    public void ejecutar(Stack<Integer> pila, int[] pc){
         int a, b;
-        a = pila.extraer();
-        b = pila.extraer();
-        pila.insertar(a);
-        pila.insertar(b);
+        a = pila.pop();
+        b = pila.pop();
+        pila.push(a);
+        pila.push(b);
         pc[0]++;
     }
 }

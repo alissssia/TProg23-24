@@ -1,8 +1,8 @@
-package practica2_820574_839304.java;
-import practica2_820574_839304.java.Prog_factorial;
-import practica2_820574_839304.java.Prog_cuenta_atras;
-import practica2_820574_839304.java.Prog_suma;
-
+/*
+* Fichero: Main.java
+* Autores: Alicia Lázaro Huerta y Manel Jordá Puig Rubio
+* Fecha: 27/02/2023
+*/
 
 
 public class Main {
@@ -30,6 +30,7 @@ public class Main {
         p3.listar();
         System.out.println("Ejecución:\n");
         p3.run();
-        System.out.println("\n");
+        //System.out.println("\n");
     }
 }
+
