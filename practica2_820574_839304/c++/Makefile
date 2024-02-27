@@ -10,6 +10,14 @@ CXX:= g++ -O2
 
 OBJS:=$(SRCS:.cc=.o)
 
+ifeq ($(OS),Windows_NT)
+    DEL := del
+    EXE := .exe
+else
+    DEL := rm -f
+    EXE :=
+endif
+
 all: $(PROG) main.s
 
 $(PROG): $(OBJS)
@@ -22,7 +30,7 @@ edit:
 	geany -s *.h *.cc &
 
 clean:
-	del $(PROG).exe $(OBJS).o main.o
+	$(DEL) $(PROG)$(EXE) $(OBJS) main.o
 
 programa.o: programa.cc programa.h
 prog_suma.o: prog_suma.cc prog_suma.h
