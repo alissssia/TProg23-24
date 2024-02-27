@@ -1,3 +1,4 @@
+#pragma once
 #include "instruccion.h"
 
 // Clase heredada de Instruccion

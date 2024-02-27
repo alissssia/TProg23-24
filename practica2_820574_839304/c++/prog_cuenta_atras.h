@@ -1,3 +1,4 @@
+#pragma once
 #include "programa.h"
 
 using namespace std;
