@@ -16,5 +16,4 @@ class Dup : public Instruccion {
         // Metodo: Extrae el primer elemento de la pila, lo inserta dos veces y aumenta el pc en 1
         void ejecutar(stack<int> &pila, int &pc);
 
-        string nombrar();
 };

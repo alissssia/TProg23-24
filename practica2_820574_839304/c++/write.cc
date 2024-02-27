@@ -16,7 +16,3 @@ void Write::ejecutar(stack<int> &pila, int &pc) {
     pila.pop();
     pc++;
 }
-
-string Write::nombrar() {
-    return nombre;
-}

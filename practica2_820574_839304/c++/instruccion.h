@@ -27,5 +27,5 @@ class Instruccion
         // Metodo: virtual puro, ejecuta las acciones necesarias sobre la pila o el pc
         void virtual ejecutar(stack<int>& pila, int &pc) = 0;
         // Metodo: devuelve el valor del atributo "nombre"
-        string virtual nombrar() = 0;
+        string nombrar();
 };

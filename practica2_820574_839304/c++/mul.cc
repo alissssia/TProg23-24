@@ -19,7 +19,3 @@ void Mul::ejecutar(stack<int> &pila, int &pc) {
     pila.push(a * b);
     pc++;
 }
-
-string Mul::nombrar() {
-    return nombre;
-}

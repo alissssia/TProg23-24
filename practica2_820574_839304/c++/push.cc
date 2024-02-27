@@ -15,7 +15,3 @@ void Push::ejecutar(stack<int> &pila, int &pc) {
     pila.push(num);
     pc++;
 }
-
-string Push::nombrar() {
-    return nombre;
-}

@@ -14,5 +14,4 @@ class Swap : public Instruccion
         //         en orden inverso
         void ejecutar(stack<int> &pila, int &pc);
 
-        string nombrar();
 };

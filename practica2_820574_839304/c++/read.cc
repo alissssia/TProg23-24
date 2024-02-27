@@ -18,7 +18,3 @@ void Read::ejecutar(stack<int> &pila, int &pc) {
     pila.push(a);
     pc++;
 }
-
-string Read::nombrar() {
-    return nombre;
-}

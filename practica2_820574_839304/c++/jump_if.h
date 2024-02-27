@@ -20,5 +20,4 @@ class Jump_If : public Instruccion {
         //      si es mayor o igual que cero, modifica el pc igual que "valor"
         //      si es menor que cero, aumenta el pc en 1
         void ejecutar(stack<int> &pila, int &pc);
-        string nombrar();
 };

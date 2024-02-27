@@ -22,7 +22,3 @@ void Jump_If::ejecutar(stack<int> &pila, int &pc) {
         pc++;
     }
 }
-
-string Jump_If::nombrar() {
-    return nombre;
-}

@@ -21,7 +21,3 @@ void Swap::ejecutar(stack<int> &pila, int &pc) {
     pila.push(b);
     pc++;
 }
-
-string Swap::nombrar() {
-    return nombre;
-}

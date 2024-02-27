@@ -22,7 +22,3 @@ void Over::ejecutar(stack<int> &pila, int &pc) {
     pila.push(b);
     pc++;
 }
-
-string Over::nombrar() {
-    return nombre;
-}

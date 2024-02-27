@@ -18,7 +18,3 @@ void Dup::ejecutar(stack<int> &pila, int &pc) {
     pila.push(a);
     pc++;
 }
-
-string Dup::nombrar() {
-    return nombre;
-}

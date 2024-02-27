@@ -7,3 +7,7 @@
 #include "instruccion.h"
 
 Instruccion::Instruccion(){}
+
+string Instruccion::nombrar(){
+    return nombre;
+}

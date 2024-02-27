@@ -19,7 +19,3 @@ void Add::ejecutar(stack<int> &pila, int &pc) {
     pila.push(a + b);
     pc++;
 }
-
-string Add::nombrar() {
-    return nombre;
-}

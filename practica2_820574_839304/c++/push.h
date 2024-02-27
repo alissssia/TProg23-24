@@ -13,6 +13,4 @@ class Push : public Instruccion {
 
         // Metodo: introduce 'valor' en la pila y aumenta en 1 el pc
         void ejecutar(stack<int> &pila, int &pc);
-        
-        string nombrar();
 };

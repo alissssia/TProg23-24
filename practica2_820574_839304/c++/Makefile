@@ -22,7 +22,7 @@ edit:
 	geany -s *.h *.cc &
 
 clean:
-	rm $(PROG) $(OBJS).o main.o
+	del $(PROG).exe $(OBJS).o main.o
 
 programa.o: programa.cc programa.h
 prog_suma.o: prog_suma.cc prog_suma.h
