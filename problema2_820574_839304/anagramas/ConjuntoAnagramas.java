@@ -3,7 +3,8 @@
 * Fecha: 05/03/2024
 */
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ConjuntoAnagramas {
     Map<String, Anagrama> anagramas; // usamos un map para que sea mas facil buscar anagramas
@@ -16,7 +17,9 @@ public class ConjuntoAnagramas {
         String palabraPrincipal = Anagrama.palabraPrincipal(palabra); 
 
         if (anagramas.containsKey(palabraPrincipal)) { // si ya existe el anagrama, añadimos la palabra
-            anagramas.get(palabraPrincipal).anadirPalabra(palabra);
+            if(anagramas.get(palabraPrincipal).anadirPalabra(palabra)){
+                anagramas.get(palabraPrincipal).add(palabra);
+            }
 
         } else { // si no existe, creamos un nuevo anagrama
             Anagrama anagrama = new Anagrama(palabra);
@@ -24,13 +27,14 @@ public class ConjuntoAnagramas {
         }
     }
 
-    public String toString() {
+    public String toString(int tamanoMinimo) {
         String resultado = "";
         for (Anagrama anagrama : anagramas.values()) {
-            resultado += anagrama.toString() + ", ";
+            if (anagrama.getSize() >= tamanoMinimo){
+                resultado += "\n" + anagrama.toString();
+            }
         }
         
-        resultado = resultado.substring(0, resultado.length() - 2) + "\n"; // quitamos el ultimo ", " y añadimos un salto de linea al final
         return resultado;
     }
 }
