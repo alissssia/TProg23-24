@@ -3,6 +3,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "<unnamed_class$Main>",
+      "request": "launch",
+      "mainClass": "<unnamed_class$Main>",
+      "projectName": "TProg23-24_1b9e57d8"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "practica2_820574_839304.java.Main",

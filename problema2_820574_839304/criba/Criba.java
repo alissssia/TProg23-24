@@ -37,5 +37,6 @@ public class Criba {
         System.out.println("Ingrese un numero: ");
         int numero = sc.nextInt();
         cribar(numero);
+        sc.close();
     }
 }

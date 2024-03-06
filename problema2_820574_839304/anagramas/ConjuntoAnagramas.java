@@ -13,7 +13,7 @@ public class ConjuntoAnagramas {
     }
 
     public void anadirAnagrama(String palabra) {
-        String palabraPrincipal = Anagrama.PalabraPrincipal(palabra); 
+        String palabraPrincipal = Anagrama.palabraPrincipal(palabra); 
 
         if (anagramas.containsKey(palabraPrincipal)) { // si ya existe el anagrama, añadimos la palabra
             anagramas.get(palabraPrincipal).anadirPalabra(palabra);
@@ -27,8 +27,10 @@ public class ConjuntoAnagramas {
     public String toString() {
         String resultado = "";
         for (Anagrama anagrama : anagramas.values()) {
-            resultado += anagrama.toString() + "\n";
+            resultado += anagrama.toString() + ", ";
         }
+        
+        resultado = resultado.substring(0, resultado.length() - 2) + "\n"; // quitamos el ultimo ", " y añadimos un salto de linea al final
         return resultado;
     }
 }

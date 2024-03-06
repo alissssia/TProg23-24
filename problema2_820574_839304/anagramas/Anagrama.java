@@ -10,13 +10,14 @@ public class Anagrama implements Comparable<Anagrama> { // tiene que ser compara
     private List<String> palabras;
 
     public Anagrama(String palabra) {
-        palabraPrincipal = PalabraPrincipal(palabra);
+        palabraPrincipal = palabraPrincipal(palabra);
         palabras = new ArrayList<String>();
         palabras.add(palabra);
     }
+
     // esta funcion crea la palabra principal del anagrama, es decir, la palabra por la que 
     // sera conocido cada anagrama (cada grupo de palabras con las mismas letras)
-    public String PalabraPrincipal(String palabra) { 
+    public static String palabraPrincipal(String palabra) { 
         char[] palabraOrdenada = palabra.toCharArray();
         Arrays.sort(palabraOrdenada); // se puede ordenar gracias a que es comparable
         return new String(palabraOrdenada);
@@ -24,10 +25,19 @@ public class Anagrama implements Comparable<Anagrama> { // tiene que ser compara
 
     public void anadirPalabra(String palabra) {
         for (String p : palabras) {
-            if (p.equals(palabra)) { // si ya existe la palabra no la añadimos
-                return;
+            if (!p.equals(palabra)) { // si ya existe la palabra no la añadimos
+                palabras.add(palabra);
             }
         }
-        palabras.add(palabra);
+    }
+ 
+    public int compareTo(Anagrama ana){
+        if(this.palabras.size() < ana.palabras.size()){
+            return -1;
+        } else if (this.palabras.size() > ana.palabras.size()){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
