@@ -22,8 +22,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Documents/GitHub/TProg23-24/practica2_820574_839304/c++",
-      "program": "c:/Documents/GitHub/TProg23-24/practica2_820574_839304/c++/build/Debug/outDebug",
+      "cwd": "c:/Documents/GitHub/TProg23-24/practica3_820574_839304/c++",
+      "program": "c:/Documents/GitHub/TProg23-24/practica3_820574_839304/c++/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
