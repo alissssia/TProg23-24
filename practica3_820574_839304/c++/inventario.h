@@ -1,7 +1,7 @@
 /*
 * Fichero: inventario.h
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
-* Fecha: 29/02/2024
+* Fecha: 09/03/2024
 */
 
 #pragma once

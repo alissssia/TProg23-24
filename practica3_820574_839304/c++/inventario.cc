@@ -1,7 +1,7 @@
 /*
 * Fichero: inventario.cc
-* Autores: Alicia Laz   aro Huerta y Manel Jorda Puig Rubio
-* Fecha: 29/02/2024
+* Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
+* Fecha: 09/03/2024
 */
 
 #include "inventario.h"
