@@ -6,7 +6,7 @@
 
 #include "toxico.h"
 
-Toxico::Toxico(double _volumen, string _nombre, double _peso)
+Toxico::Toxico(string _nombre, double _volumen, double _peso)
             :ProdGenerico(_volumen, _nombre, _peso)
 {
 }

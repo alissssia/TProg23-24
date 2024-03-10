@@ -11,5 +11,6 @@ using namespace std;
 
 class Carga : public Inventario{
     
+    protected: 
     Carga(double _volumen);
 };

@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 class Inventario
 {
     
@@ -22,5 +23,4 @@ public:
     string get_nombre();
     double get_volumen();
     virtual double get_peso() = 0;
-    virtual string to_string() = 0;
 };

@@ -9,6 +9,6 @@
 
 class Toxico : public ProdGenerico{
     public:
-        Toxico(double _volumen, string _nombre, double _peso);
+        Toxico(string _nombre, double _volumen, double _peso);
     
 };
