@@ -9,14 +9,20 @@
 Inventario::Inventario(double _volumen)
                 :volumen(_volumen)
 {
+    nivel = 0;
 }
 
-string Inventario::get_nombre()
+string Inventario::nombre() const
 {
-    return nombre;
+    return name;
 }
 
-double Inventario::get_volumen()
+string Inventario::get_descripcion() const
+{
+    return nombre() + " [" + to_string(get_volumen()) + " m3] [" + to_string(get_peso()) + " kg]";
+}
+
+double Inventario::get_volumen() const
 {
     return volumen;
 }

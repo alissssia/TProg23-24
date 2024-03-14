@@ -12,5 +12,8 @@
 class Producto : public ProdGenerico, public Carga{
     public:
         Producto(string _nombre, double _volumen,  double _peso);
-    
+
+        string nombre() const override;
+        double get_peso() const override;
+        void aumentar_nivel() override;
 };

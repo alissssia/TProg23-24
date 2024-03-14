@@ -6,22 +6,20 @@
 
 #pragma once
 #include "inventario.h"
-#include "carga.h"
 #include <vector>
 
-template <class T>
+template <typename T>
 class Deposito : public Inventario{
     
     protected: 
-    double capacidad;
-    double peso;
-    vector<Carga> cosasDentro;
+        double volumen_libre;
+        vector<T> contenido;
 
-    // constructor
-    Deposito(double _capacidad, double _volumen);
+        // constructor
+        Deposito(double _volumen);
 
     public:
-    virtual bool guardar(T& c);
-    double get_peso() override;
-    friend ostream& operator<<(std::ostream& os, const Deposito<Carga>& c);
+        bool guardar(T& c);
+        void aumentar_nivel() override;
+        double get_peso() const override;
 };

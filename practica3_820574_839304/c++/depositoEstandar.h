@@ -9,5 +9,5 @@
 
 class DepositoEstandar : public Deposito<Carga> {
     protected:
-    DepositoEstandar(double _capacidad, double _volumen);
+        DepositoEstandar(double _volumen);
 };

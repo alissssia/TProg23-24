@@ -12,15 +12,18 @@ using namespace std;
 
 class Inventario
 {
-    
-protected:
-    string nombre;
-    double volumen;
+    protected:
+        string name;
+        double volumen;
+        double espacio_libre;
+        int nivel;
 
-    Inventario(double _volumen);
+        Inventario(double _volumen);
 
-public:
-    string get_nombre();
-    double get_volumen();
-    virtual double get_peso() = 0;
+    public:
+        string nombre() const;
+        double get_volumen() const;
+        string get_descripcion() const;
+        virtual void aumentar_nivel() = 0;
+        virtual double get_peso() const = 0;
 };

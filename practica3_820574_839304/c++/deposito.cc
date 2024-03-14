@@ -6,25 +6,45 @@
 
 #include "deposito.h"
 
-template <class T> Deposito<T>::Deposito(double _capacidad, double _volumen)
-                :Inventario(_volumen), capacidad(_capacidad)
+template <typename T> 
+Deposito<T>::Deposito(double _volumen)
+                 :Inventario(_volumen)
 {
-    peso = 0.0;
+    espacio_libre = _volumen;   // Inicialmente el depósito estará vacío,
+                                // por lo que todo el volumen estará disponible
 }
 
-template <class T> double Deposito<T>::get_peso()
+template <typename T>
+double Deposito<T>::get_peso() const
 {
+    double peso = 0.0;
+
+    for (T elemento : contenido){
+        peso += elemento.get_peso();
+    }
+
     return peso;
 }
 
-
-template <class T> bool Deposito<T>::guardar(T& c)
+template <typename T>
+void Deposito<T>::aumentar_nivel()
 {
-    if (c.get_volumen() + volumen <= capacidad)
+    nivel+=1;
+
+    for(T& elemento : contenido)
     {
-        cosasDentro.push_back(c);
-        volumen += c->get_volumen();
-        peso += c->get_peso();
+        elemento.aumentar_nivel();
+    }
+}
+
+template <typename T>
+bool Deposito<T>::guardar(T& c)
+{
+    if (c.get_volumen() <= espacio_libre)
+    {   
+        c.aumentar_nivel();
+        contenido.push_back(c);
+        espacio_libre -= c->get_volumen();
         return true;
     }
     else

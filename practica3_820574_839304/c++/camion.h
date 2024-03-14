@@ -5,9 +5,11 @@
 */
 
 #pragma once
-#include "depositoEstandar.h"
+#include "deposito.h"
 
-class Camion : public DepositoEstandar{
+class Camion : public Deposito<Carga>{
+
     public:
-    Camion(double _capacidad);
+        Camion(double _capacidad);
+        friend ostream& operator<<(ostream& os,const Camion& r);
 };

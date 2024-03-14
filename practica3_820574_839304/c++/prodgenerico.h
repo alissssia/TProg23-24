@@ -13,9 +13,9 @@ class ProdGenerico : public Inventario {
     protected:
         double peso;
 
-        ProdGenerico(double _volumen, string _nombre, double _peso);
+        ProdGenerico::ProdGenerico(const string& _nombre, double _volumen, double _peso);
 
     public:
-        double get_peso() override;
-        string to_string() override;
+        double get_peso() const override;
+        void aumentar_nivel() override;
 };

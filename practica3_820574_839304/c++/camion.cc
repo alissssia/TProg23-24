@@ -5,9 +5,10 @@
 */
 
 #include "camion.h"
+#include "carga.h"
 
-Camion::Camion(double _capacidad)
-                :DepositoEstandar(_capacidad, 0) // ese 0 hay que mirar porque es el volumen y es muy sus
+Camion::Camion(double _volumen)
+                :Deposito(_volumen)
 {
-    nombre = "Camion";
+    name = "Camion";
 }

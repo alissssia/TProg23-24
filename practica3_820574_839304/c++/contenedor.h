@@ -8,11 +8,14 @@
 #include "deposito.h"
 #include "carga.h"
 
+template <typename T>
+class Contenedor : public Deposito<T>, public Carga {
+    protected:
+        string de_que;
 
-class Contenedor : public Deposito<Carga>, public Carga{
-    
     public:
-    Contenedor(double _volumen);
-    double get_peso();
-    friend ostream& operator<<(std::ostream& os, const Deposito<Carga>& c);
+        Contenedor(double _volumen);
+        void aumentar_nivel() override;
+        double get_peso() const override;
+        friend ostream& operator<<(std::ostream& os, const Deposito<Carga>& c);
 };

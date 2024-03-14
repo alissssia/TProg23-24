@@ -6,19 +6,25 @@
 
 #include "prodgenerico.h"
 
-ProdGenerico::ProdGenerico(double _volumen, string _nombre, double _peso)
+ProdGenerico::ProdGenerico(const string& _nombre, double _volumen, double _peso)
             :Inventario(_volumen), peso(_peso)
 {
-    nombre = _nombre;
+    name = _nombre;
 }
 
-double ProdGenerico::get_peso()
+double ProdGenerico::get_peso() const
 {
     return peso;
 }
 
-
-string ProdGenerico::to_string()
+void ProdGenerico::aumentar_nivel()
 {
-    return nombre;
+    nivel+=1;
+}
+
+
+ostream& operator<<(ostream& os, const ProdGenerico& r)
+{
+    os << r.get_descripcion();
+    return os;
 }

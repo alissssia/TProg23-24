@@ -6,7 +6,7 @@
 
 #include "depositoEstandar.h"
 
-DepositoEstandar::DepositoEstandar(double _capacidad, double _volumen)
-                :Deposito<Carga>(_capacidad, _volumen)
+DepositoEstandar::DepositoEstandar(double _volumen)
+                :Deposito<Carga>(_volumen)
 {
 }

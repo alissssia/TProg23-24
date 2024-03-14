@@ -7,6 +7,6 @@
 #include "servivo.h"
 
 SerVivo::SerVivo(string _nombre, double _volumen, double _peso)
-            :ProdGenerico(_volumen, _nombre, _peso)
+            :ProdGenerico(_nombre, _volumen, _peso)
 {
 }

@@ -1,4 +1,14 @@
 #include "producto.h"
 
 Producto::Producto(string _nombre, double _volumen, double _peso) 
-: ProdGenerico(_volumen, _nombre, _peso), Carga(_volumen) {}
+: ProdGenerico(_nombre, _volumen, _peso), Carga(_volumen) {}
+
+double Producto::get_peso() const
+{
+    return ProdGenerico::get_peso();
+}
+
+void Producto::aumentar_nivel()
+{
+    ProdGenerico::aumentar_nivel();
+}

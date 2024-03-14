@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	// Esto no deberia compilar
 	contenedor_estandar->guardar(discos_melendi);
 #endif
-
+ 
 	SerVivo* elvis_presley = new SerVivo("Elvis Presley",0.1,100);
 	Contenedor<SerVivo>* contenedor_elvis = new Contenedor<SerVivo>(1);
 	contenedor_elvis->guardar(elvis_presley);
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
 	Producto* apuntes_tepro = new Producto("Apuntes de TePro",0.5,0.1);
 	if (!camion.guardar(apuntes_tepro))
-		cout << "Camion lleno con "  << apuntes_tepro->nombre()<< endl;
+		cout << "Camion lleno con "  << apuntes_tepro->nombre() << endl;
 
 	Producto* trenzas_almudevar = new Producto("Trenzas de Almudevar",3.5,50);
 	if (!camion.guardar(trenzas_almudevar))
