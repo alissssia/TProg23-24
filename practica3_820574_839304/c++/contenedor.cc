@@ -27,9 +27,9 @@ Contenedor<SerVivo>::Contenedor(double _volumen)
 
 template <typename T>
 Contenedor<T>::Contenedor(double _volumen)
-                : Deposito<T>(_volumen), Carga(_volumen)
+                : Deposito<Carga>(_volumen), Carga(_volumen)
 {
-    Deposito::nombre = "Contenedor";
+    Deposito<Carga>::nombre = "Contenedor";
     Carga::name = "Contenedor";
     de_que = "de Carga Estandar";
 }

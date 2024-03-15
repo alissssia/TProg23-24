@@ -6,6 +6,7 @@
 
 #pragma once
 #include "deposito.h"
+#include "carga.h"
 
 class Camion : public Deposito<Carga>{
 

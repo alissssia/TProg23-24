@@ -13,9 +13,10 @@ class ProdGenerico : public Inventario {
     protected:
         double peso;
 
-        ProdGenerico::ProdGenerico(const string& _nombre, double _volumen, double _peso);
+        ProdGenerico(const string& _nombre, double _volumen, double _peso);
 
     public:
+        virtual string nombre() const ;
         double get_peso() const override;
         void aumentar_nivel() override;
 };

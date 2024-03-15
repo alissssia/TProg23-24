@@ -12,3 +12,8 @@ void Producto::aumentar_nivel()
 {
     ProdGenerico::aumentar_nivel();
 }
+
+string Producto::nombre() const
+{
+    return ProdGenerico::nombre();
+}

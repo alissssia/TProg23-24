@@ -12,14 +12,13 @@ template <typename T>
 class Deposito : public Inventario{
     
     protected: 
-        double volumen_libre;
         vector<T> contenido;
 
         // constructor
         Deposito(double _volumen);
 
     public:
-        bool guardar(T& c);
+        bool guardar(T* c);
         void aumentar_nivel() override;
         double get_peso() const override;
 };
