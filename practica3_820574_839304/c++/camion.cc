@@ -5,10 +5,9 @@
 */
 
 #include "camion.h"
-#include "carga.h"
 
 Camion::Camion(double _volumen)
-                :Deposito(_volumen)
+                :Deposito<Carga>(_volumen)
 {
     name = "Camion";
 }

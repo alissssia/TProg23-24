@@ -5,7 +5,6 @@
 */
 
 #include "deposito.h"
-#include "inventario.h"
 
 template <typename T> 
 Deposito<T>::Deposito(double _volumen)

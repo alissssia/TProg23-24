@@ -9,27 +9,29 @@
 #include "toxico.h"
 #include "servivo.h"
 
+template<>
 Contenedor<Toxico>::Contenedor(double _volumen)
                 : Deposito<Toxico>(_volumen), Carga(_volumen)
 {
-    Deposito::name = "Contenedor";
+    Deposito<Toxico>::name = "Contenedor";
     Carga::name = "Contenedor";
     de_que = "de Productos Toxicos";
 }
 
+template<>
 Contenedor<SerVivo>::Contenedor(double _volumen)
                 : Deposito<SerVivo>(_volumen), Carga(_volumen)
 {
-    Deposito::name = "Contenedor";
+    Deposito<SerVivo>::name = "Contenedor";
     Carga::name = "Contenedor";
     de_que = "de Seres Vivos";
 }
 
 template <typename T>
 Contenedor<T>::Contenedor(double _volumen)
-                : Deposito<Carga>(_volumen), Carga(_volumen)
+                : Deposito<T>(_volumen), Carga(_volumen)
 {
-    Deposito<Carga>::nombre = "Contenedor";
+    Deposito<T>::nombre = "Contenedor";
     Carga::name = "Contenedor";
     de_que = "de Carga Estandar";
 }
@@ -37,13 +39,13 @@ Contenedor<T>::Contenedor(double _volumen)
 template <typename T>
 double Contenedor<T>::get_peso() const
 {
-    return Deposito::get_peso();
+    return Deposito<T>::get_peso();
 }
 
 template <typename T>
 void Contenedor<T>::aumentar_nivel()
 {
-    Deposito::aumentar_nivel();
+    Deposito<T>::aumentar_nivel();
 }
 
 
@@ -57,7 +59,7 @@ ostream& operator<<(ostream& os,const Deposito<T>& r)
         os << tabs << elemento;
     }
 
-	os << "\n";
+	//os << "\n";
 
 	return os;
 }

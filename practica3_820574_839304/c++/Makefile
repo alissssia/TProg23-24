@@ -1,7 +1,7 @@
 PROG:=main
 SRCS:=main.cc
 
-CXX:=g++ -Wall
+CXX:=g++ -Wall -std=c++11
 
 OBJS:=$(SRCS:.cc=.o)
 DEPS:=$(SRCS:.cc=.d)

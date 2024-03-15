@@ -11,6 +11,6 @@
 class Camion : public Deposito<Carga>{
 
     public:
-        Camion(double _capacidad);
+        Camion(double _volumen);
         friend ostream& operator<<(ostream& os,const Camion& r);
 };
