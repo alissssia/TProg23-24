@@ -9,4 +9,13 @@
 #include "producto.h"
 #include "servivo.h"
 #include "toxico.h"
+#include "camion.cc"
+#include "carga.cc"
+#include "contenedor.cc"
+#include "deposito.cc"
+#include "inventario.cc"
+#include "prodgenerico.cc"
+#include "producto.cc"
+#include "servivo.cc"
+#include "toxico.cc"
 #include <iostream>

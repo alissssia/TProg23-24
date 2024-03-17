@@ -1,5 +1,5 @@
 /*
-* Fichero: contenedor.h
+* Fichero: contenedor.cc
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
 * Fecha: 09/03/2024
 */
@@ -27,11 +27,12 @@ Contenedor<SerVivo>::Contenedor(double _volumen)
     de_que = "de Seres Vivos";
 }
 
-template <typename T>
-Contenedor<T>::Contenedor(double _volumen)
-                : Deposito<T>(_volumen), Carga(_volumen)
+
+template<>
+Contenedor<Carga>::Contenedor(double _volumen)
+                : Deposito<Carga>(_volumen), Carga(_volumen)
 {
-    Deposito<T>::nombre = "Contenedor";
+    Deposito<Carga>::name = "Contenedor";
     Carga::name = "Contenedor";
     de_que = "de Carga Estandar";
 }
@@ -52,7 +53,7 @@ void Contenedor<T>::aumentar_nivel()
 template <typename T>
 ostream& operator<<(ostream& os,const Deposito<T>& r)
 {   
-    os << r.nombre() << "[" << r.get_volumen() << " m3]" << "[" << r.get_peso() << " kg] <<\n";
+    os << r.nombre() << "[" << r.get_volumen() << " m3]" << "[" << r.get_peso() << " kg]" << "\n";
 
     for (T elemento : r.contenido){
         string tabs (elemento.nivel, "  ");
