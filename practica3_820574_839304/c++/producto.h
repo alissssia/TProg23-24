@@ -11,9 +11,16 @@
 
 class Producto : public ProdGenerico, public Carga{
     public:
-        Producto(string _nombre, double _volumen,  double _peso);
+        Producto(string _nombre, double _volumen,  double _peso)
+        : ProdGenerico(_nombre, _volumen, _peso), Carga(_volumen) {}
 
-        string nombre() const override;
-        double get_peso() const override;
-        void aumentar_nivel() override;
+        string nombre() const override {
+            return ProdGenerico::nombre();
+        }
+        double get_peso() const override {
+            return ProdGenerico::get_peso();
+        }
+        void aumentar_nivel() override {
+            ProdGenerico::aumentar_nivel();
+        }
 };

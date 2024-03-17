@@ -9,6 +9,7 @@
 
 class Toxico : public ProdGenerico{
     public:
-        Toxico(string _nombre, double _volumen, double _peso);
+        Toxico(string _nombre, double _volumen, double _peso)
+            :ProdGenerico(_nombre, _volumen, _peso) {}
     
 };
