@@ -11,3 +11,8 @@ Carga::Carga(double _volumen)
 {
 }
 
+std::ostream& operator<<(std::ostream& os, const Carga* carga) {
+    
+    os << carga->nombre();
+    return os;
+}

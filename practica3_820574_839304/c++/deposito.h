@@ -12,7 +12,7 @@ template <typename T>
 class Deposito : public Inventario{
     
     protected: 
-        vector<T> contenido;
+        vector<T*> contenido;
 
         // constructor
         Deposito(double _volumen);

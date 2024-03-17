@@ -13,4 +13,7 @@ class Carga : public Inventario{
     
     protected: 
         Carga(double _volumen);
+    
+    public:
+        friend ostream& operator<<(std::ostream& os, const Carga* carga);
 };

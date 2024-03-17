@@ -21,9 +21,10 @@ class Inventario
         Inventario(double _volumen);
 
     public:
-        string nombre() const;
+        virtual string nombre() const;
         double get_volumen() const;
         string get_descripcion() const;
+        int get_nivel() const;
         virtual void aumentar_nivel() = 0;
         virtual double get_peso() const = 0;
 };

@@ -19,7 +19,7 @@ double Deposito<T>::get_peso() const
 {
     double peso = 0.0;
 
-    for (T elemento : contenido){
+    for (T* elemento : contenido){
         peso += elemento->get_peso();
     }
 
@@ -31,7 +31,7 @@ void Deposito<T>::aumentar_nivel()
 {
     nivel+=1;
 
-    for(T& elemento : contenido)
+    for(T* elemento : contenido)
     {
         elemento->aumentar_nivel();
     }

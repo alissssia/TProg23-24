@@ -51,9 +51,9 @@ void Contenedor<T>::aumentar_nivel()
 
 
 template <typename T>
-ostream& operator<<(ostream& os,const Deposito<T>& r)
+ostream& operator<<(ostream& os,const Contenedor<T>& r)
 {   
-    os << r.nombre() << "[" << r.get_volumen() << " m3]" << "[" << r.get_peso() << " kg]" << "\n";
+    os << r.nombre() << "[" << r.get_volumen() << " m3]" << "[" << r.get_peso() << " kg] " << r.de_que << "\n";
 
     for (T elemento : r.contenido){
         string tabs (elemento.nivel, "  ");

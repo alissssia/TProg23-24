@@ -22,6 +22,11 @@ string Inventario::get_descripcion() const
     return nombre() + " [" + to_string(get_volumen()) + " m3] [" + to_string(get_peso()) + " kg]";
 }
 
+int Inventario::get_nivel() const
+{
+    return nivel;
+}
+
 double Inventario::get_volumen() const
 {
     return volumen;
