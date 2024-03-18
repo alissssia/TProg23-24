@@ -26,13 +26,18 @@ class Inventario
 
     public:
         
+        string nombre() const
+        {
+            return name;
+        }
 
         double get_volumen() const
         {
             return volumen;
         }
 
-        int get_nivel() const {
+        int get_nivel() const
+        {
             return nivel;
         }
 };

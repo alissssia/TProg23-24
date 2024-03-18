@@ -14,18 +14,12 @@ class ProdGenerico : public Inventario {
         double peso;
 
         ProdGenerico(const string& _nombre, double _volumen, double _peso)
-                    :Inventario(_volumen), peso(_peso)
+                    : Inventario(_volumen), peso(_peso)
         {
             name = _nombre;
         }
 
     public:
-
-        string nombre() const
-        {
-            return name;
-        }
-      
         double get_peso() const
         {
             return peso;
@@ -36,14 +30,15 @@ class ProdGenerico : public Inventario {
             nivel+=1;
         }
 
+        virtual string descripcion() const
+        {
+            string resultado = this->nombre() + " [" + to_string(this->get_volumen()) + " m3] ["
+                                + to_string(this->get_peso()) + " kg]\n";
+            return resultado;
+        }
+
         friend ostream& operator<<(std::ostream& os, const ProdGenerico& p){
-            string corchete = " [";
-            string m3 = " m3]";
-            string kg = " kg]\n";
-            
-            
-            os << p.nombre() << corchete + to_string(p.get_volumen()) << m3 << corchete + to_string(p.get_peso()) << kg;
-    
+            os << p.descripcion();
             return os;
         }
 };

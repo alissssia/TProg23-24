@@ -12,94 +12,61 @@
 
 template <typename T>
 class Contenedor : public Deposito<T>, public Carga {
-    protected:
-        string de_que;
 
     public:
-    /*
-        Contenedor<Toxico>::Contenedor(double _volumen)
-                : Deposito<Toxico>(_volumen), Carga(_volumen)
+    
+        Contenedor(double _volumen)
+                : Inventario(_volumen), Deposito<T>(_volumen), Carga(_volumen)
         {
-            Deposito<Toxico>::name = "Contenedor";
             Carga::name = "Contenedor";
-            de_que = "de Productos Toxicos";
         }
 
-        Contenedor<SerVivo>::Contenedor(double _volumen)
-                : Deposito<SerVivo>(_volumen), Carga(_volumen)
+        string nombre() const
         {
-            Deposito<SerVivo>::name = "Contenedor";
-            Carga::name = "Contenedor";
-            de_que = "de Seres Vivos";
+            return Carga::nombre();
         }
-    */
-        Contenedor(double _volumen)
-                : Deposito<T>(_volumen), Carga(_volumen)
+
+        double get_volumen() const
         {
-            Deposito<T>::name = "Contenedor";
-            Carga::name = "Contenedor";
+            return Carga::get_volumen();
+        }
+
+        double get_peso() const
+        {
+            return Deposito<T>::get_peso();
         }
 
         void aumentar_nivel()
         {
-            Deposito<T>::aumentar_nivel();
+            nivel+=1;
+
+            for(T* elemento : this->contenido)
+            {
+                elemento->aumentar_nivel();
+            }
         }
 
-
-        friend ostream& operator<<(std::ostream& os, const Contenedor<Carga>& c)
+        string descripcion() const
         {
-            string corchete = " [";
-            string m3 = " m3]";
-            string kg = " kg]";
-            string de_que = " de Carga Estandar\n";
-            
-            os << c.nombre() << corchete << to_string(c.Carga::get_volumen()) << m3 << corchete << to_string(c.Carga::get_peso()) << kg << de_que;
+            string resultado = this->nombre() + " [" + to_string(this->get_volumen()) + " m3] ["
+                                + to_string(this->get_peso()) + " kg] " + T::de_que() + "\n";
 
-            for (T elemento : c.contenido){
-                string tabs (elemento.nivel, "  ");
-                os << tabs << elemento;
+            for (T* elemento : this->contenido){
+                string tabs = "";
+                for(int i = 0; i < elemento->get_nivel(); i++)
+                {
+                    tabs += "  ";
+                }
+                resultado += tabs + elemento->descripcion();
             }
-
-            //os << "\n";
-
-            return os;
+            
+            return resultado;
         }
 
-        friend ostream& operator<<(std::ostream& os, const Contenedor<SerVivo>& c)
+        friend ostream& operator<<(std::ostream& os, const Contenedor<T>& c)
         {
-            string corchete = " [";
-            string m3 = " m3]";
-            string kg = " kg]";
-            string de_que = " de Seres Vivos\n";
             
-            os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg << de_que;
-
-            for (T elemento : c.contenido){
-                string tabs (elemento.nivel, "  ");
-                os << tabs << elemento;
-            }
-
-            //os << "\n";
-
-            return os;
-        }
-
-        friend ostream& operator<<(std::ostream& os, const Contenedor<Toxico>& c)
-        {
-            string corchete = " [";
-            string m3 = " m3]";
-            string kg = " kg]";
-            string de_que = " de Productos Toxicos\n";
-            
-            os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg << de_que;
-
-            for (T elemento : c.contenido){
-                string tabs (elemento.nivel, "  ");
-                os << tabs << elemento;
-            }
-
-            //os << "\n";
-
+            os << c.descripcion();
             return os;
         }
 };

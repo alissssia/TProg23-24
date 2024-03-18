@@ -11,5 +11,15 @@ class SerVivo : public ProdGenerico{
     public:
         SerVivo(string _nombre, double _volumen, double _peso)
             : ProdGenerico(_nombre, _volumen, _peso) {}
-    
+
+        static string de_que()
+        {
+            return "de Seres Vivos";
+        }
+
+        friend ostream& operator<<(ostream& os,const SerVivo& c)
+        {
+            os << c.descripcion();
+            return os;
+        }
 };

@@ -9,7 +9,7 @@
 #include <vector>
 
 template <typename T>
-class Deposito : public Inventario{
+class Deposito : public virtual Inventario{
     
     protected:
         vector<T*> contenido;
@@ -35,16 +35,6 @@ class Deposito : public Inventario{
             else
             {
                 return false;
-            }
-        }
-
-        void aumentar_nivel()
-        {
-            nivel+=1;
-
-            for(T* elemento : contenido)
-            {
-                elemento->aumentar_nivel();
             }
         }
 

@@ -12,8 +12,38 @@
 class Producto : public ProdGenerico, public Carga{
     public:
         Producto(string _nombre, double _volumen,  double _peso)
-        : ProdGenerico(_nombre, _volumen, _peso), Carga(_volumen) {}
+        : Inventario(_volumen), ProdGenerico(_nombre, _volumen, _peso), Carga(_volumen)   {}
 
+        string nombre() const
+        {
+            return Carga::nombre();
+        }
+
+        double get_volumen() const
+        {
+            return Carga::get_volumen();
+        }
+
+        void aumentar_nivel()
+        {
+            ProdGenerico::aumentar_nivel();
+        }
+
+        double get_peso() const
+        {
+            return ProdGenerico::get_peso();
+        }
+
+        string descripcion() const
+        {
+            return this->Carga::descripcion();
+        }
+
+        friend ostream& operator<<(ostream& os,const Producto& c)
+        {
+            os << c.descripcion();
+            return os;
+        }
         /*
         string nombre() const
         {
