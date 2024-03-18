@@ -19,8 +19,15 @@ class Camion : public Deposito<Carga>{
 
         string descripcion() const
         {
-            string resultado = this->nombre() + " [" + to_string(this->get_volumen()) + " m3] ["
-                                + to_string(this->get_peso()) + " kg]\n";
+
+            string str_peso = to_string(this->get_peso());
+            while (str_peso[str_peso.size() - 1] == '0' || str_peso[str_peso.size() - 1] == '.') str_peso.resize(str_peso.size() - 1);
+            
+            string str_volumen = to_string(this->get_volumen());
+            while (str_volumen[str_volumen.size() - 1] == '0' || str_volumen[str_volumen.size() - 1] == '.') str_volumen.resize(str_volumen.size() - 1);
+
+            string resultado = this->nombre() + " [" + str_volumen + " m3] ["
+                                + str_peso + " kg]\n";
 
             for (Carga* elemento : this->contenido){
                 string tabs = "";

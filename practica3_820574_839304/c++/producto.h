@@ -16,12 +16,17 @@ class Producto : public ProdGenerico, public Carga{
 
         string nombre() const
         {
-            return Carga::nombre();
+            return ProdGenerico::nombre();
+        }
+
+        double get_nivel() const
+        {
+            return ProdGenerico::get_nivel();
         }
 
         double get_volumen() const
         {
-            return Carga::get_volumen();
+            return ProdGenerico::get_volumen();
         }
 
         void aumentar_nivel()
@@ -36,7 +41,7 @@ class Producto : public ProdGenerico, public Carga{
 
         string descripcion() const
         {
-            return this->Carga::descripcion();
+            return this->ProdGenerico::descripcion();
         }
 
         friend ostream& operator<<(ostream& os,const Producto& c)
