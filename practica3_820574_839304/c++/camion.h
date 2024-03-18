@@ -11,16 +11,23 @@
 class Camion : public Deposito<Carga>{
 
     public:
-        Camion(double _volumen) :Deposito<Carga>(_volumen)
+        Camion(double _volumen)
+            :Deposito<Carga>(_volumen)
         {
             name = "Camion";
         }
+
+        string nombre() const
+        {
+            return name;
+        }
+
         friend ostream& operator<<(ostream& os,const Camion& c) {
-            string corchete = "[";
+            string corchete = " [";
             string m3 = " m3]";
             string kg = " kg]\n";
             
-            os << c.nombre() << corchete << c.get_volumen() << m3 << corchete << c.get_peso() << kg;
+            os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg;
 
             for (Carga* elemento : c.contenido){
                 string tabs = "";
@@ -28,7 +35,8 @@ class Camion : public Deposito<Carga>{
                 {
                     tabs += "  ";
                 }
-                os << tabs << elemento;
+                os << tabs;
+                os << elemento;
             }
 
             //os << "\n";

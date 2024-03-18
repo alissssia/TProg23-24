@@ -9,7 +9,7 @@
 
 class SerVivo : public ProdGenerico{
     public:
-        SerVivo(string _nombre, double _volumen, double _peso) 
+        SerVivo(string _nombre, double _volumen, double _peso)
             : ProdGenerico(_nombre, _volumen, _peso) {}
     
 };

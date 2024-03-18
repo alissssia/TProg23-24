@@ -18,7 +18,7 @@ ostream& operator<<(ostream& os,const Camion& c)
     string m3 = " m3]";
     string kg = " kg]\n";
     
-    os << c.nombre() << corchete << c.get_volumen() << m3 << corchete << c.get_peso() << kg;
+    os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg;
 
     for (Carga* elemento : c.contenido){
         string tabs = "";

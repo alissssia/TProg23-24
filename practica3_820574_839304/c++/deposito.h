@@ -11,12 +11,11 @@
 template <typename T>
 class Deposito : public Inventario{
     
-    protected: 
+    protected:
         vector<T*> contenido;
 
         // constructor
-        Deposito(double _volumen);
-        Deposito<T>::Deposito(double _volumen)
+        Deposito(double _volumen)
                  :Inventario(_volumen)
         {
             espacio_libre = _volumen;   // Inicialmente el depósito estará vacío,
@@ -24,11 +23,10 @@ class Deposito : public Inventario{
         }
 
     public:
-        bool guardar(T* c);
-        bool Deposito<T>::guardar(T* c)
+        bool guardar(T* c)
         {
             if (c->get_volumen() <= espacio_libre)
-            {   
+            {
                 c->aumentar_nivel();
                 contenido.push_back(c);
                 espacio_libre -= c->get_volumen();
@@ -40,8 +38,7 @@ class Deposito : public Inventario{
             }
         }
 
-        void aumentar_nivel() override;
-        void Deposito<T>::aumentar_nivel()
+        void aumentar_nivel()
         {
             nivel+=1;
 
@@ -52,8 +49,7 @@ class Deposito : public Inventario{
         }
 
 
-        double get_peso() const override;
-        double Deposito<T>::get_peso() const
+        double get_peso() const
         {
             double peso = 0.0;
 

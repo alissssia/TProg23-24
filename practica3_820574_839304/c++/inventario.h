@@ -25,20 +25,14 @@ class Inventario
         }
 
     public:
-        virtual string nombre() const {            
-            return name;            
-        }
-        double get_volumen() const {
+        
+
+        double get_volumen() const
+        {
             return volumen;
-        
         }
-        string get_descripcion() const {
-            return nombre() + " [" + to_string(get_volumen()) + " m3] [" + to_string(get_peso()) + " kg]";
-        
-        }
+
         int get_nivel() const {
             return nivel;
         }
-        virtual void aumentar_nivel() = 0;
-        virtual double get_peso() const = 0;
 };

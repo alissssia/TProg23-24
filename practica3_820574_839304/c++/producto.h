@@ -14,13 +14,21 @@ class Producto : public ProdGenerico, public Carga{
         Producto(string _nombre, double _volumen,  double _peso)
         : ProdGenerico(_nombre, _volumen, _peso), Carga(_volumen) {}
 
-        string nombre() const override {
-            return ProdGenerico::nombre();
+        /*
+        string nombre() const
+        {
+            return ProdGenerico::name;
         }
-        double get_peso() const override {
+
+        
+        double get_peso() const
+        {
             return ProdGenerico::get_peso();
         }
-        void aumentar_nivel() override {
+
+        void aumentar_nivel()
+        {
             ProdGenerico::aumentar_nivel();
         }
+        */
 };

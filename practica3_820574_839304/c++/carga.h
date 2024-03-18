@@ -12,14 +12,20 @@ using namespace std;
 class Carga : public Inventario{
     
     protected: 
-        Carga(double _volumen) :Inventario(_volumen)
+        Carga(double _volumen) 
+            :Inventario(_volumen)
         {
-
         }
+
+
+
     
     public:
-        friend ostream& operator<<(std::ostream& os, const Carga* carga) {
-            os << carga->nombre();
+        virtual void aumentar_nivel();
+        virtual double get_peso();
+        friend ostream& operator<<(ostream& os,const Carga& c)
+        {
             return os;
         }
+
 };

@@ -7,6 +7,8 @@
 #pragma once
 #include "deposito.h"
 #include "carga.h"
+#include "servivo.h"
+#include "toxico.h"
 
 template <typename T>
 class Contenedor : public Deposito<T>, public Carga {
@@ -14,7 +16,7 @@ class Contenedor : public Deposito<T>, public Carga {
         string de_que;
 
     public:
-        Contenedor(double _volumen);
+    /*
         Contenedor<Toxico>::Contenedor(double _volumen)
                 : Deposito<Toxico>(_volumen), Carga(_volumen)
         {
@@ -30,35 +32,68 @@ class Contenedor : public Deposito<T>, public Carga {
             Carga::name = "Contenedor";
             de_que = "de Seres Vivos";
         }
-
-        Contenedor<Carga>::Contenedor(double _volumen)
-                : Deposito<Carga>(_volumen), Carga(_volumen)
+    */
+        Contenedor(double _volumen)
+                : Deposito<T>(_volumen), Carga(_volumen)
         {
-            Deposito<Carga>::name = "Contenedor";
+            Deposito<T>::name = "Contenedor";
             Carga::name = "Contenedor";
-            de_que = "de Carga Estandar";
         }
 
-
-        void aumentar_nivel() override;
-        void Contenedor<T>::aumentar_nivel()
+        void aumentar_nivel()
         {
             Deposito<T>::aumentar_nivel();
         }
 
 
-        double get_peso() const override;
-        double Contenedor<T>::get_peso() const
+        friend ostream& operator<<(std::ostream& os, const Contenedor<Carga>& c)
         {
-            return Deposito<T>::get_peso();
+            string corchete = " [";
+            string m3 = " m3]";
+            string kg = " kg]";
+            string de_que = " de Carga Estandar\n";
+            
+            os << c.nombre() << corchete << to_string(c.Carga::get_volumen()) << m3 << corchete << to_string(c.Carga::get_peso()) << kg << de_que;
+
+            for (T elemento : c.contenido){
+                string tabs (elemento.nivel, "  ");
+                os << tabs << elemento;
+            }
+
+            //os << "\n";
+
+            return os;
         }
 
+        friend ostream& operator<<(std::ostream& os, const Contenedor<SerVivo>& c)
+        {
+            string corchete = " [";
+            string m3 = " m3]";
+            string kg = " kg]";
+            string de_que = " de Seres Vivos\n";
+            
+            os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg << de_que;
 
-        friend ostream& operator<<(std::ostream& os, const Deposito<Carga>& c)
-        {   
-            os << r.nombre() << "[" << r.get_volumen() << " m3]" << "[" << r.get_peso() << " kg] " << r.de_que << "\n";
+            for (T elemento : c.contenido){
+                string tabs (elemento.nivel, "  ");
+                os << tabs << elemento;
+            }
 
-            for (T elemento : r.contenido){
+            //os << "\n";
+
+            return os;
+        }
+
+        friend ostream& operator<<(std::ostream& os, const Contenedor<Toxico>& c)
+        {
+            string corchete = " [";
+            string m3 = " m3]";
+            string kg = " kg]";
+            string de_que = " de Productos Toxicos\n";
+            
+            os << c.nombre() << corchete << to_string(c.get_volumen()) << m3 << corchete << to_string(c.get_peso()) << kg << de_que;
+
+            for (T elemento : c.contenido){
                 string tabs (elemento.nivel, "  ");
                 os << tabs << elemento;
             }

@@ -20,10 +20,30 @@ class ProdGenerico : public Inventario {
         }
 
     public:
-        double get_peso() const override {
+
+        string nombre() const
+        {
+            return name;
+        }
+      
+        double get_peso() const
+        {
             return peso;
         }
-        void aumentar_nivel() override {
+
+        void aumentar_nivel()
+        {
             nivel+=1;
+        }
+
+        friend ostream& operator<<(std::ostream& os, const ProdGenerico& p){
+            string corchete = " [";
+            string m3 = " m3]";
+            string kg = " kg]\n";
+            
+            
+            os << p.nombre() << corchete + to_string(p.get_volumen()) << m3 << corchete + to_string(p.get_peso()) << kg;
+    
+            return os;
         }
 };
