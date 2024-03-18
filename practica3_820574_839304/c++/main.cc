@@ -21,7 +21,7 @@ int main(int argc, char** argv)
 	// Esto no deberia compilar
 	contenedor_estandar->guardar(discos_melendi);
 #endif
- 
+
 	SerVivo* elvis_presley = new SerVivo("Elvis Presley",0.1,100);
 	Contenedor<SerVivo>* contenedor_elvis = new Contenedor<SerVivo>(1);
 	contenedor_elvis->guardar(elvis_presley);

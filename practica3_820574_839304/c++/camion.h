@@ -43,7 +43,9 @@ class Camion : public Deposito<Carga>{
         }
 
         friend ostream& operator<<(ostream& os,const Camion& c) {
-            os << c.descripcion();
+            string str_descripcion = c.descripcion();
+            str_descripcion.resize(str_descripcion.size() - 1);
+            os << str_descripcion;
             return os;
         }
 };

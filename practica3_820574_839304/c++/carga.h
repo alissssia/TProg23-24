@@ -25,8 +25,6 @@ class Carga : public virtual Inventario{
         {
             return "de Carga Estandar";
         }
-
-        //virtual string descripcion() const = 0;
         
         virtual string descripcion() const
         {

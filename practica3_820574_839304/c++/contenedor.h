@@ -63,7 +63,7 @@ class Contenedor : public Deposito<T>, public Carga {
             for (T* elemento : this->contenido){
                 string tabs = "";
 
-                cout << elemento->nombre() << " " << to_string(elemento->get_nivel()) << endl;
+                //cout << elemento->nombre() << " " << to_string(elemento->get_nivel()) << endl;
 
                 for(int i = 0; i < elemento->get_nivel(); i++)
                 {
