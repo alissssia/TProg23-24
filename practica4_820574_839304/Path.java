@@ -1,49 +1,60 @@
 /*
-* Fichero: Path.java
+* Fichero: pathName.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio
 * Fecha: 25/03/2024
 */
 
-public class Path {
-    private String path;
+public class Path
+{
+    private String pathName;
 
-    Path(String _path)
+    Path(String _pathName)
     {
-        path = _path;
+        pathName = _pathName;
     }
 
 
-    public void setPath(String path)
+    public void setPathName(String pathName)
     {
-        this.path = path;
+        this.pathName = pathName;
     }
 
-    public String getPath()
+    public String getPathName()
     {
-        return path;
+        return pathName;
     }
 
     public String to_String()
     {
-        return path;
+        return pathName;
     }
 
-    // Cambia el path del objeto al mismo path + "/" + name (parámetro)
-    // Devuelve el nuevo path en forma de String
-    public String to(String name)
+    // Cambia el pathName del objeto al mismo pathName + "/" + name (parámetro)
+    // Devuelve el nuevo pathName en forma de String
+    public Path to(String name)
     {
-        String reString = path + "/" + name;
-        this.setPath(reString);
+        String pathRes = new String();
 
-        return reString;
+        if (pathName.equals("/"))
+        {
+            pathRes = "/" + name;
+        }
+        else
+        {
+            pathRes = pathName + "/" + name;
+        }
+        
+        return new Path(pathRes);
     }
 
-    // Cambia el path del objeto al mismo path un directorio atrás
-    // Devuelve el nuevo path en forma de String
-    public String back()
+    // Cambia el pathName del objeto al mismo pathName un directorio atrás
+    // Devuelve el nuevo pathName en forma de String
+    public Path back()
     {
-        String[] tokens = path.split("/");
-        String resString = new String();
+        if (pathName.equals("/")) return new Path("/");
+
+        String[] tokens = pathName.split("/");
+        String pathRes = new String();
         
         // Nos saltamos el primer token (vacío porque coge
         // desde el inicio hasta el primer "/", que es el primer char)
@@ -51,22 +62,27 @@ public class Path {
 
         for(int i = 1; i < tokens.length - 1; i++)
         {
-            resString += "/" + tokens[i];
+            pathRes += "/" + tokens[i];
         }
 
-        this.setPath(resString);
-
-        return resString;
+        return new Path(pathRes);
     }
 
+    public String getLastDirectory()
+    {
+        String[] tokens = pathName.split("/");
+
+        
+        return tokens[tokens.length - 1];
+    }
     
     /* TEST
 
     public static void main(String[] argv)
     {
-        Path prueba = new Path("/root/dir1/dir2");
+        pathName prueba = new pathName("/root/dir1/dir2");
 
-        System.out.println(prueba.getPath());
+        System.out.println(prueba.getpathName());
         System.out.println(prueba.to("TARGET"));
         System.out.println(prueba.back());
     }

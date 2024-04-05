@@ -8,7 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Directorio extends Nodo{
+public class Directorio extends Nodo
+{
     
     public Map<String, Nodo> content;
     
@@ -45,4 +46,10 @@ public class Directorio extends Nodo{
     {
         return content.containsKey(s);
     }
+
+    public Nodo getItem(String s)
+    {
+        return content.get(s);
+    }
+
 }
