@@ -23,6 +23,9 @@ public class Directorio extends Nodo
     public double getSize() {
         double res = 0;
         
+        int maxLevels = 10; // límite de niveles para evitar bucles infinitos
+
+        
         // CUIDADO: llevar cuenta (de alguna forma) de cuantos niveles hemos recorrido
         // por si hay bucles provocados por enlaces que darían size infinito
         for(Map.Entry<String, Nodo> archivo : content.entrySet()){

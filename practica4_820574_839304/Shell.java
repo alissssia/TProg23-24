@@ -16,9 +16,9 @@ public class Shell
 
     Shell()
     {
+        cwdPath = new Path("/");
         root = new Directorio("root", cwdPath, null);
         cwd = root;
-        cwdPath = new Path("/");
     }
 
     public String pwd()
@@ -104,6 +104,69 @@ public class Shell
         }
     }
 
+    public void ln(String path, String name)
+    {
+        try {
+            if (/* name no valido porque pasa una ruta*/) {
+                throw new NombreEnlaceNoValido("Nombre no válido: " + name);
+            }
+
+            if (/* path no valido porque no existe ese objeto */) {
+                throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
+            }
+
+            Enlace enlace = new Enlace(name, cwdPath.getPathName(), cwdPath.getParent(), path);
+            pwd.add(enlace);
+        } catch (NombreEnlaceNoValido e) {
+            e.printStackTrace();
+        } catch (NoExisteObjetoEnEsaRuta e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
+
+    // Devuelve el tamaño del nodo que referencia el path
+    int void stat (String path) 
+    {
+        try {
+            if (/* path no valido porque no existe ese objeto */) {
+                throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
+            }
+            /* idk what i'm doing, coger muy con pinzas */
+            Nodo nodo = cwd.getItem(path);
+            return nodo.getSize();
+            
+        } catch (NoExisteObjetoEnEsaRuta e) {
+            e.printStackTrace();
+        } catch (Exception e) { 
+            e.printStackTrace(); 
+        }
+    }
+
+    public void rm (String path) {
+ 
+
+        try {
+            if (/* path no valido porque no existe ese objeto */) {
+                throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
+            }
+            Path() ruta = new Path(path);
+
+            // si vamos a borrar el directorio en el que nos encontramos
+            if (path.equals(cwd.getPath().getPathName())) { 
+                Path() nuevaRuta = cwd.setPath(ruta.back());
+            }
+            cwd.remove(path);
+            cwd.setPath(nuevaRuta);
+            
+        } catch (NoExisteObjetoEnEsaRuta e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
 }
