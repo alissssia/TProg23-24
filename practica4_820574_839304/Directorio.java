@@ -13,9 +13,9 @@ public class Directorio extends Nodo
     
     public Map<String, Nodo> content;
     
-    Directorio(String _name, Path _path, Nodo _parent)
+    Directorio(String _name, Path _path)
     {
-        super(_name, _path, _parent);
+        super(_name, _path);
         content = new HashMap<>();
     }
 

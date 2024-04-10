@@ -5,32 +5,32 @@
 */
 
 import java.util.Map;
+import java.util.Stack;
+
 
 
 public class Shell
 {
-    private Path cwdPath;
+    private Stack<Directorio> cwd;
     private Directorio root;
-    private Directorio cwd;
 
 
     Shell()
     {
-        cwdPath = new Path("/");
-        root = new Directorio("root", cwdPath, null);
-        cwd = root;
+        root = new Directorio("root", new Path("/"));
+        cwd = new Stack<Directorio>();
     }
 
     public String pwd()
     {
-        return cwd.getPath().getPathName();
+        return cwd.peek().getPath().getPathName();
     }
 
     public String ls()
     {
         String resList = new String();
 
-        for(Map.Entry<String, Nodo> archivo : cwd.content.entrySet()){
+        for(Map.Entry<String, Nodo> archivo : cwd.peek().content.entrySet()){
             resList = resList + archivo.getKey() + "\n";
         }
 
@@ -47,7 +47,7 @@ public class Shell
     {
         String resList = new String();
 
-        for(Map.Entry<String, Nodo> archivo : cwd.content.entrySet()){
+        for(Map.Entry<String, Nodo> archivo : cwd.peek().content.entrySet()){
             resList = resList + archivo.getKey() + "\t\t\t\t" + String.valueOf(archivo.getValue().getSize()) + "\n";
         }
 
@@ -66,13 +66,13 @@ public class Shell
 
         if(cwd.contains(name))
         {
-            fich = (Fichero) cwd.getItem(name);
+            fich = (Fichero) cwd.peek().getItem(name);
             fich.setSize(size);
         }
         else 
         {
-            fich = new Fichero(name, cwdPath.to(name), cwd, size);
-            cwd.add(fich);
+            fich = new Fichero(name, cwd.peek().getPath().to(name), size);
+            cwd.peek().add(fich);
         }
     }
 
@@ -84,7 +84,7 @@ public class Shell
         }
         else
         {
-            cwd.add(new Directorio(name, cwdPath.to(name), cwd));
+            cwd.add(new Directorio(name, cwd.peek().getPath().to(name)));
         }
     }
 
@@ -104,7 +104,7 @@ public class Shell
         }
     }
 
-    public void ln(String path, String name)
+    public void ln(String path, String name)        // EXCEPCION: nombre ya existe en directorio
     {
         try {
             if (/* name no valido porque pasa una ruta*/) {
@@ -114,9 +114,9 @@ public class Shell
             if (/* path no valido porque no existe ese objeto */) {
                 throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
             }
-
-            Enlace enlace = new Enlace(name, cwdPath.getPathName(), cwdPath.getParent(), path);
-            pwd.add(enlace);
+            
+            Enlace enlace = new Enlace(name, cwd.peek().getPath().getPathName(), path);
+            cwd.peek().add(enlace);
         } catch (NombreEnlaceNoValido e) {
             e.printStackTrace();
         } catch (NoExisteObjetoEnEsaRuta e) {
@@ -129,14 +129,14 @@ public class Shell
 
 
     // Devuelve el tamaño del nodo que referencia el path
-    int void stat (String path) 
+    double stat (String path) 
     {
         try {
             if (/* path no valido porque no existe ese objeto */) {
                 throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
             }
             /* idk what i'm doing, coger muy con pinzas */
-            Nodo nodo = cwd.getItem(path);
+            Nodo nodo = cwd.peek().getItem(path);
             return nodo.getSize();
             
         } catch (NoExisteObjetoEnEsaRuta e) {
@@ -153,14 +153,17 @@ public class Shell
             if (/* path no valido porque no existe ese objeto */) {
                 throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
             }
-            Path() ruta = new Path(path);
 
+            Path ruta = new Path(path);
+            
+            /*
             // si vamos a borrar el directorio en el que nos encontramos
-            if (path.equals(cwd.getPath().getPathName())) { 
-                Path() nuevaRuta = cwd.setPath(ruta.back());
+            if (path.equals(cwd.peek().getPath().getPathName())) { 
+                Path nuevaRuta = cwd.peek().setPath(ruta.back());
             }
             cwd.remove(path);
             cwd.setPath(nuevaRuta);
+            */
             
         } catch (NoExisteObjetoEnEsaRuta e) {
             e.printStackTrace();

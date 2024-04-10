@@ -10,15 +10,14 @@ abstract class Nodo
     protected Path path;
     protected Nodo parent;
 
-    Nodo(String _name, Path _path, Nodo _parent){
+    Nodo(String _name, Path _path){
         name = _name;
         path = _path;
-        parent = _parent;
     }
 
     abstract public double getSize();
     
-    /*
+    
     public String getName() {
         return name;
     }
@@ -42,5 +41,5 @@ abstract class Nodo
     public void setParent(Nodo parent) {
         this.parent = parent;
     }
-    */
+    
 }
