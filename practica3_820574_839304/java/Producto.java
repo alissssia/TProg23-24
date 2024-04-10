@@ -1,4 +1,3 @@
-package java;
 /*
 * Fichero: Producto.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio

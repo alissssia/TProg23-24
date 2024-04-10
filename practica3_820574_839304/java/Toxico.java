@@ -1,4 +1,3 @@
-package java;
 /*
 * Fichero: Toxico.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio

@@ -24,7 +24,7 @@ public class Path
         return pathName;
     }
 
-    public String to_String()
+    public String toString()
     {
         return pathName;
     }
@@ -59,32 +59,110 @@ public class Path
         // Nos saltamos el primer token (vacío porque coge
         // desde el inicio hasta el primer "/", que es el primer char)
         // y nos saltamos el último para volver al dir anterior
+        int i = 0;
 
-        for(int i = 1; i < tokens.length - 1; i++)
+        if(tokens[i] == "")
         {
-            pathRes += "/" + tokens[i];
+            i = 1;
+        }
+
+        for(; i < tokens.length - 1; i++)
+        {
+            if(i != 0) pathRes += "/";
+            pathRes += tokens[i];
         }
 
         return new Path(pathRes);
     }
 
-    public String getLastDirectory()
+    public Path getLastDirectory()
     {
         String[] tokens = pathName.split("/");
 
+        return new Path(tokens[tokens.length-1]);
+    }
+
+    public Path getFirstDirectory()
+    {
+        String[] tokens = pathName.split("/");
+
+        if(tokens[0] == "")
+        {
+            return new Path(tokens[1]);
+        }
+
+        return  new Path(tokens[0]);
+    }
+
+    public void removeFirstDirectory()
+    {
+        if(!pathName.contains("/"))
+        {
+            setPathName("");
+            return;
+        }
         
-        return tokens[tokens.length - 1];
+        String[] tokens = pathName.split("/");
+
+        String pathRes = "";
+        
+        int i = 1;
+
+        if(tokens[0] == "")
+        {
+            i = 2;
+        }
+
+        while(i < tokens.length)
+        {
+            pathRes += tokens[i];
+            if(i != tokens.length-1)
+            {
+                pathRes += "/";
+            }
+
+            i++;
+        }
+
+        setPathName(pathRes);
+    }
+
+    public boolean isRootPath()
+    {
+        return pathName.charAt(0) == '/';
     }
     
     /* TEST
-
+    */
     public static void main(String[] argv)
     {
-        pathName prueba = new pathName("/root/dir1/dir2");
+        Path prueba = new Path("/root/dir1/dir2");
 
-        System.out.println(prueba.getpathName());
-        System.out.println(prueba.to("TARGET"));
-        System.out.println(prueba.back());
+        System.out.println("    ----- TEST 1: desde root -----");
+        System.out.println("getPathName: " + prueba.getPathName());
+        System.out.println("to(\"TARGET\"): " + prueba.to("TARGET"));
+        System.out.println("back: " + prueba.back());
+        System.out.println("getLastDirectory: " + prueba.getLastDirectory());
+        System.out.println("getFirstDirectory: " + prueba.getFirstDirectory());
+        System.out.println("isRootPath: " + prueba.isRootPath());
+        prueba.removeFirstDirectory();
+        System.out.println("removeFirstDirectory: " + prueba.getPathName());
+
+
+        System.out.println();
+
+        Path prueba2 = new Path("root/dir1/dir2");
+
+        System.out.println("    ----- TEST 2: desde directorio actual -----");
+        System.out.println("getPathName: " + prueba2.getPathName());
+        System.out.println("to(\"TARGET\"): " + prueba2.to("TARGET"));
+        System.out.println("back: " + prueba2.back());
+        System.out.println("getLastDirectory: " + prueba2.getLastDirectory());
+        System.out.println("getFirstDirectory: " + prueba2.getFirstDirectory());
+        System.out.println("isRootPath: " + prueba2.isRootPath());
+        prueba2.removeFirstDirectory();
+        System.out.println("removeFirstDirectory: " + prueba2.getPathName());
+
     }
-    */
+    
 }

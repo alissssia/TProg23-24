@@ -19,6 +19,7 @@ public class Shell
     {
         root = new Directorio("root", new Path("/"));
         cwd = new Stack<Directorio>();
+        cwd.push(root);
     }
 
     public String pwd()
@@ -84,39 +85,129 @@ public class Shell
         }
         else
         {
-            cwd.add(new Directorio(name, cwd.peek().getPath().to(name)));
+            cwd.peek().add(new Directorio(name, cwd.peek().getPath().to(name)));
         }
     }
 
-    public void cd(String path)
+    public void cd(String strPath)
     {
-        if(path.equals("."))
+        if(strPath.equals("."))
         {
-            // no hace nada? o añade '.' al pathName? preguntar
+            // no hace nada
         }
-        else if(path.equals(".."))
+        else if(strPath.equals(".."))
         {
-            // solo nos lleva al padre? o añade '.' al pathName? preguntar
+            cwd.pop();
         }
-        else
+        else 
         {
+            Path path = new Path(strPath);
+            Directorio dirActual;
 
-        }
-    }
-
-    public void ln(String path, String name)        // EXCEPCION: nombre ya existe en directorio
-    {
-        try {
-            if (/* name no valido porque pasa una ruta*/) {
-                throw new NombreEnlaceNoValido("Nombre no válido: " + name);
+            if(path.isRootPath())
+            {
+                returnToRootDir();
+                dirActual = root;
             }
-
-            if (/* path no valido porque no existe ese objeto */) {
-                throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + path);
+            else
+            {
+                dirActual = cwd.peek();
             }
             
-            Enlace enlace = new Enlace(name, cwd.peek().getPath().getPathName(), path);
-            cwd.peek().add(enlace);
+             
+            while(!path.getPathName().equals(""))
+            {
+                String pathName = path.getFirstDirectory().getPathName();
+                if(dirActual.contains(pathName))
+                {
+                    if(dirActual.getItem(pathName) instanceof Directorio)
+                    {
+                        cwd.push((Directorio) dirActual.getItem(pathName));
+                    }
+                    else if(dirActual.getItem(pathName) instanceof Enlace)
+                    {
+                        Enlace enlace = (Enlace) dirActual.getItem(pathName);
+                        cwd.push((Directorio) enlace.getTarget());
+                    }
+                    else
+                    {
+                        // EXCEPCIÓN no es ni enlace ni directorio
+                    }
+                }
+                else
+                {
+                    throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + strPath);
+                }
+                
+                path.removeFirstDirectory();
+                dirActual = cwd.peek();
+            
+            }
+        }
+    }
+
+    public void ln(String strPath, String name)        // EXCEPCION: nombre ya existe en directorio
+    {
+        try {
+            if (name.contains("/")) {
+                throw new NombreEnlaceNoValido("Nombre no válido: " + name);
+            }
+            
+
+            Directorio dirActual;
+
+            Path path = new Path(strPath);
+            if(path.isRootPath())
+            {
+                dirActual = root;
+            }
+            else
+            {
+                dirActual = cwd.peek();
+            }
+
+            while(path.getPathName().contains("/"))
+            {
+                String pathName = path.getFirstDirectory().getPathName();
+
+                if(dirActual.contains(pathName))
+                {
+                    if(dirActual.getItem(pathName) instanceof Directorio)
+                    {
+                        dirActual = (Directorio) dirActual.getItem(pathName);
+                    }
+                    else if(dirActual.getItem(pathName) instanceof Enlace)
+                    {
+                        Enlace enlace = (Enlace) dirActual.getItem(pathName);
+                        dirActual = (Directorio) enlace.getTarget();
+                    }
+                    else
+                    {
+                        // EXCEPCIÓN no es ni enlace ni directorio
+                    }
+                }
+                else
+                {
+                    throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + strPath);
+                }
+                
+                path.removeFirstDirectory();
+            }
+
+            path = new Path(strPath);
+            String targetName = path.getLastDirectory().getPathName();
+            // Hemos llegado al directorio en el que se encuentra el ultimo objeto de la direccion pasada (dirActual)
+            if(dirActual.contains(targetName))
+            {
+                Nodo target = dirActual.getItem(targetName);
+                Enlace enlace = new Enlace(name, dirActual.getPath(), target);
+                dirActual.add(enlace);
+            }
+            else
+            {
+                throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + strPath);
+            }
+
         } catch (NombreEnlaceNoValido e) {
             e.printStackTrace();
         } catch (NoExisteObjetoEnEsaRuta e) {
@@ -164,12 +255,18 @@ public class Shell
             cwd.remove(path);
             cwd.setPath(nuevaRuta);
             */
-            
+
         } catch (NoExisteObjetoEnEsaRuta e) {
             e.printStackTrace();
         }
 
 
 
+    }
+
+    private void returnToRootDir()
+    {
+        cwd.clear();
+        cwd.push(root);
     }
 }

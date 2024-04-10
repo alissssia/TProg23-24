@@ -1,4 +1,3 @@
-package java;
 /*
 * Fichero: ProdGenerico.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio

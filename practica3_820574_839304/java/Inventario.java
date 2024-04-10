@@ -1,4 +1,3 @@
-package java;
 /*
 * Fichero: Inventario.java
 * Autores: Alicia Lazaro Huerta y Manel Jorda Puig Rubio

@@ -4,13 +4,14 @@
 * Fecha: 25/03/2024
 */
 
-public class Enlace extends Nodo{
+public class Enlace extends Nodo
+{
     
     protected Nodo target;
 
-    Enlace(String _name, Path _path, Nodo _parent, Nodo _target)
+    Enlace(String _name, Path _path, Nodo _target)
     {
-        super(_name, _path, _parent);
+        super(_name, _path);
         target = _target;
     }
 
@@ -18,6 +19,10 @@ public class Enlace extends Nodo{
     public double getSize()
     {
         return target.getSize();
+    }
+
+    public Nodo getTarget() {
+        return target;
     }
 
 }
