@@ -41,5 +41,9 @@ abstract class Nodo
     public void setParent(Nodo parent) {
         this.parent = parent;
     }
+
+    public boolean equals(Nodo n) {
+        return this.getPath().getPathName().equals(n.getPath().getPathName());
+    }
     
 }

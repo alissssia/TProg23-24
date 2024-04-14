@@ -50,9 +50,19 @@ public class Directorio extends Nodo
         return content.containsKey(s);
     }
 
+    public boolean contains(Nodo n)
+    {
+        return (contains(n.name) && getItem(n.name).equals(n));
+    }
+
     public Nodo getItem(String s)
     {
         return content.get(s);
+    }
+
+    public void clearItems()
+    {
+        content.clear();
     }
 
 }

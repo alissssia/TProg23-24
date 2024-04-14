@@ -77,6 +77,11 @@ public class Path
 
     public Path getLastDirectory()
     {
+        if (pathName.equals("") || !pathName.contains("/"))
+        {
+            return new Path(pathName);
+        }
+
         String[] tokens = pathName.split("/");
 
         return new Path(tokens[tokens.length-1]);
@@ -130,6 +135,11 @@ public class Path
     public boolean isRootPath()
     {
         return pathName.charAt(0) == '/';
+    }
+
+    public boolean hasMoreDirectories()
+    {
+        return pathName.contains("/");
     }
     
     /* TEST
