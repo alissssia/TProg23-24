@@ -9,14 +9,14 @@ public class Enlace extends Nodo
     
     protected Nodo target;
 
-    Enlace(String _name, Path _path, Nodo _target)
+    Enlace(String _name, Directorio _parent, Nodo _target)
     {
-        super(_name, _path);
+        super(_name, _parent);
         target = _target;
     }
 
     @Override
-    public double getSize()
+    public int getSize()
     {
         return target.getSize();
     }

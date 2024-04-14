@@ -87,16 +87,16 @@ public class Path
         return new Path(tokens[tokens.length-1]);
     }
 
-    public Path getFirstDirectory()
+    public String getFirstDirectory()
     {
         String[] tokens = pathName.split("/");
 
         if(tokens[0] == "")
         {
-            return new Path(tokens[1]);
+            return tokens[1];
         }
 
-        return  new Path(tokens[0]);
+        return tokens[0];
     }
 
     public void removeFirstDirectory()
@@ -141,6 +141,24 @@ public class Path
     {
         return pathName.contains("/");
     }
+
+    public void removeRootBar()
+    {
+        if(pathName.charAt(0) == '/')
+        {
+            setPathName(pathName.substring(1));
+        }
+    }
+
+    public boolean endsWithBar()
+    {
+        return (pathName.charAt(pathName.length()-1) == '/');
+    }
+
+    public boolean hasDoubleBar()
+    {
+        return (pathName.contains("//"));
+    }
     
     /* TEST
     */
@@ -155,9 +173,10 @@ public class Path
         System.out.println("getLastDirectory: " + prueba.getLastDirectory());
         System.out.println("getFirstDirectory: " + prueba.getFirstDirectory());
         System.out.println("isRootPath: " + prueba.isRootPath());
-        prueba.removeFirstDirectory();
-        System.out.println("removeFirstDirectory: " + prueba.getPathName());
-
+        // prueba.removeFirstDirectory();
+        // System.out.println("removeFirstDirectory: " + prueba.getPathName());
+        prueba.removeRootBar();
+        System.out.println("removeRootBar: " + prueba);
 
         System.out.println();
 

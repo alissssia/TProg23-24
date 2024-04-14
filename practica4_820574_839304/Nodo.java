@@ -8,14 +8,21 @@ abstract class Nodo
 {
     protected String name;
     protected Path path;
-    protected Nodo parent;
+    protected Directorio parent;
 
-    Nodo(String _name, Path _path){
+    Nodo(String _name, Directorio _parent){
         name = _name;
-        path = _path;
+        path = _parent.getPath().to(name);
+        parent = _parent;
     }
 
-    abstract public double getSize();
+    Nodo(Directorio _dir){
+        name = "root";
+        path = new Path("/");
+        parent = _dir;
+    }
+
+    abstract public int getSize();
     
     
     public String getName() {
@@ -34,11 +41,11 @@ abstract class Nodo
         this.path = path;
     }
 
-    public Nodo getParent() {
+    public Directorio getParent() {
         return parent;
     }
 
-    public void setParent(Nodo parent) {
+    public void setParent(Directorio parent) {
         this.parent = parent;
     }
 

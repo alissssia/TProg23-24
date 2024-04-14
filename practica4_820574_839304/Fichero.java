@@ -7,21 +7,21 @@
 public class Fichero extends Nodo
 {
     
-    protected double size;
+    protected int size;
 
-    Fichero(String _name, Path _path,double _size)
+    Fichero(String _name, Directorio _parent, int _size)
     {
-        super(_name, _path);
+        super(_name, _parent);
         size = _size;
     }
 
     @Override
-    public double getSize()
+    public int getSize()
     {
         return size;
     }
 
-    public void setSize(double _size)
+    public void setSize(int _size)
     {
         size = _size;
     }

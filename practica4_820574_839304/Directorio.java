@@ -13,15 +13,21 @@ public class Directorio extends Nodo
     
     public Map<String, Nodo> content;
     
-    Directorio(String _name, Path _path)
+    Directorio(String _name, Directorio _parent)
     {
-        super(_name, _path);
+        super(_name, _parent);
+        content = new HashMap<>();
+    }
+
+    Directorio(Directorio _dir)
+    {
+        super(_dir);
         content = new HashMap<>();
     }
 
     @Override
-    public double getSize() {
-        double res = 0;
+    public int getSize() {
+        int res = 0;
         
         int maxLevels = 10; // límite de niveles para evitar bucles infinitos
 
