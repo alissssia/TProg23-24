@@ -101,31 +101,38 @@ public class Shell
 
     public void cd(String strPath)
     {
-        try {
         
-            if(strPath.equals("."))
-            {
-                // no hace nada
-            }
-            else if(strPath.equals("..")) // va al directorio padre
-            {
-                cwd.pop();
-            }
-            else 
-            {
-                Path path = new Path(strPath);
-                Directorio dirActual;
+        
+        if(strPath.equals("."))
+        {
+            // no hace nada
+        }
+        else if(strPath.equals("..")) // va al directorio anterior
+        {
+            cwd.pop();
 
-                if(path.isRootPath()) //si nos dan una ruta absoluta empezamos desde la raiz
-                {
-                    returnToRootDir();
-                    dirActual = root;
-                }
-                else // si la ruta es relativa empezamos desde la cima de la pila
-                {
-                    dirActual = cwd.peek();
-                }
-                
+            if(cwd.empty())     // siempre tiene que estar root como directorio base
+            {
+                cwd.push(root);
+            }
+            
+        }
+        else 
+        {
+            Path path = new Path(strPath);
+            Directorio dirActual;
+
+            if(path.isRootPath()) //si nos dan una ruta absoluta empezamos desde la raiz
+            {
+                returnToRootDir();
+                dirActual = root;
+            }
+            else // si la ruta es relativa empezamos desde la cima de la pila
+            {
+                dirActual = cwd.peek();
+            }
+            
+            try {
                 
                 while(!path.getPathName().equals(""))
                 {
@@ -155,16 +162,17 @@ public class Shell
                     dirActual = cwd.peek();
                 
                 }
+            } catch (NoEsEnlaceNiDirectorio e) {
+                System.out.println(e.getMessage());
+            } catch (NoExisteObjetoEnEsaRuta e) {
+                System.out.println(e.getMessage());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
-        catch (NoEsEnlaceNiDirectorio e) {
-            System.out.println(e.getMessage());
-        } catch (NoExisteObjetoEnEsaRuta e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
+    
+
 
 
 
@@ -174,8 +182,7 @@ public class Shell
             if (name.contains("/")) {
                 throw new NombreEnlaceNoValido("Nombre no válido: " + name);
             }
-            
-
+        
             Directorio dirActual;
 
             Path path = new Path(strPath);
@@ -255,19 +262,21 @@ public class Shell
     // Devuelve el tamaño del nodo que referencia el path
     double stat (String path)
     {
+        
+
+        Path ruta = new Path(path);
+        Directorio dirActual, dirAnterior;
+
+        if(ruta.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
+        {
+            dirActual = root;
+        }
+        else // si la ruta es relativa empezamos desde la cima de la pila
+        {
+            dirActual = cwd.peek();
+        }
+
         try {
-
-            Path ruta = new Path(path);
-            Directorio dirActual, dirAnterior;
-
-            if(ruta.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
-            {
-                dirActual = root;
-            }
-            else // si la ruta es relativa empezamos desde la cima de la pila
-            {
-                dirActual = cwd.peek();
-            }
 
             while(ruta.hasMoreDirectories()) // mientras haya más directorios en el camino
             {
@@ -330,29 +339,28 @@ public class Shell
         } catch (Exception e) { 
             System.out.println(e.getMessage()); 
         }
+
+        return 0;
     }
 
 
 
     public void rm (String path) {
-        boolean directorioSalvado = false; // para controlar si el directorio a salvar ya ha sido encontrado
-        Directorio aSalvoDeBorrar = null;
+        
+                
+        Path rutaHastaNodo = new Path(path);
+        Directorio dirActual;
+
+        if(rutaHastaNodo.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
+        {
+            dirActual = root;
+        }
+        else // si la ruta es relativa empezamos desde la cima de la pila
+        {
+            dirActual = cwd.peek();
+        }
 
         try {
-                
-            Path rutaHastaNodo = new Path(path);
-            Directorio dirActual;
-    
-            if(rutaHastaNodo.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
-            {
-                dirActual = root;
-            }
-            else // si la ruta es relativa empezamos desde la cima de la pila
-            {
-                dirActual = cwd.peek();
-            }
-    
-            Path rutaActual = cwd.peek().getPath();
 
             while(rutaHastaNodo.hasMoreDirectories()) // mientras haya más directorios en el camino
             {

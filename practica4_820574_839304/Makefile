@@ -15,5 +15,5 @@ edit:
 	@geany -s -i $(SRCS) &
 
 clean:
-	@rm -f *.class core tags
+	@del -f *.class core tags
 

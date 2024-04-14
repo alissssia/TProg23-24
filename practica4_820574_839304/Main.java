@@ -70,7 +70,7 @@ class Main
 				}
 				else
 				{
-					System.out.println("Error sintactico: comando desconocido");
+					throw new ExcepcionArbolFicheros("Error sintactico: comando desconocido");
 				}
 			}
 			catch(ExcepcionArbolFicheros e)
