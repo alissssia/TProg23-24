@@ -201,6 +201,7 @@ public class Shell
     {
         Directorio dirActual;
         Path path = new Path(strPath);
+
         Stack<Directorio> cwdCopy = new Stack<Directorio>();
         cwdCopy.addAll(cwd);
 
@@ -319,6 +320,7 @@ public class Shell
     {
         Path path = new Path(strPath);
         Directorio dirActual;
+
         Stack<Directorio> cwdCopy = new Stack<Directorio>();
         cwdCopy.addAll(cwd);
 
@@ -421,6 +423,7 @@ public class Shell
                 
         Path rutaHastaNodo = new Path(strPath);
         Directorio dirActual;
+
         Stack<Directorio> cwdCopy = new Stack<Directorio>();
         cwdCopy.addAll(cwd);
 
