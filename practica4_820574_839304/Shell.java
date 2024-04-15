@@ -4,9 +4,8 @@
 * Fecha: 05/04/2024
 */
 
-import java.util.Map;
 import java.util.Stack;
-
+import java.util.Map;
 
 
 public class Shell
@@ -52,38 +51,51 @@ public class Shell
             resList += archivo.getKey() + "\t" + String.valueOf(getSizeWithLimit(archivo.getValue(), controlBuclesInfinitos)) + "\n";
         }
 
+        
          // quitamos el ultimo salto de linea
         if(resList.length() > 0)
         {
             resList.substring(0, resList.length() - 1);
         }
+        
 
         return resList;
     }
 
-    public void vi(String name, int size) // no necesita excepciones 
+    public void vi(String name, int size)
     {
         Fichero fich;
+        try {
+            if(cwd.contains(name)) // si existe el fichero
+            {
+                Nodo nodo = obtenerObjetoReal(cwd.peek().getItem(name)); // por si fuera un enlace
 
-        if(cwd.contains(name)) // si existe el fichero
-        {
-            fich = (Fichero) cwd.peek().getItem(name);
-            fich.setSize(size);
-        }
-        else // si no existe se crea con ese tamaño
-        {
-            try {
+                if(!(nodo instanceof Fichero))
+                {
+                    throw new NoEsFichero("Ya existe un nodo con el nombre, pero no es un fichero: "+ name);
+                }
+
+                fich = (Fichero) nodo;
+                fich.setSize(size);
+                
+            }
+            else // si no existe se crea con ese tamaño
+            {
+                
                 if(new Path(name).hasMoreDirectories())
                 {
-                    throw new NombreFicheroNoValido("Nombre de directorio no válido, contiene '/': " + name);
+                    throw new NombreFicheroNoValido("Nombre de fichero no válido, contiene '/': " + name);
                 }
 
                 fich = new Fichero(name, cwd.peek(), size);
                 cwd.peek().add(fich);
+            
             }
-            catch(NombreFicheroNoValido e){
-                System.out.println(e.getMessage());
-            }
+        }
+        catch(NoEsFichero e){
+            System.out.println(e.getMessage());
+        } catch(NombreFicheroNoValido e){
+            System.out.println(e.getMessage());
         }
     }
 
@@ -145,32 +157,22 @@ public class Shell
                 if(nextPathName.equals("."))
                 {
                     // no hace nada
-                } 
+                }
                 else if (nextPathName.equals(".."))
                 {
                     goBackIfPossible(cwd);
                 }
                 else if(dirActual.contains(nextPathName)) // si el directorio actual contiene el siguiente directorio en el camino
                 {
-                    if(dirActual.getItem(nextPathName) instanceof Directorio) // si el siguiente directorio es un directorio
+                    Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
+
+                    if(nodo instanceof Directorio) // si el siguiente directorio es un directorio
                     {
-                        cwd.push((Directorio) dirActual.getItem(nextPathName));
-                    }
-                    else if(dirActual.getItem(nextPathName) instanceof Enlace) // si el siguiente directorio es un enlace
-                    {
-                        Enlace enlace = (Enlace) dirActual.getItem(nextPathName);
-                        if(enlace.getTarget() instanceof Directorio)
-                        {
-                            cwd.add((Directorio) enlace.getTarget());
-                        }
-                        else
-                        {
-                            throw new TargetNoEsDirectorio("El target del enlace no es un directorio: " + nextPathName);
-                        }
+                        cwd.push((Directorio) nodo);
                     }
                     else
                     {
-                        throw new NoEsEnlaceNiDirectorio("El objeto especificado no es ni enlace ni directorio: " + dirActual.getItem(nextPathName));
+                        throw new NoEsDirectorio("El objeto especificado no es un directorio: " + nextPathName);
                     }
                 }
                 else
@@ -182,9 +184,7 @@ public class Shell
                 dirActual = cwd.peek();
             
             }
-        } catch (TargetNoEsDirectorio e) {
-            System.out.println(e.getMessage());
-        } catch (NoEsEnlaceNiDirectorio e) {
+        } catch (NoEsDirectorio e) {
             System.out.println(e.getMessage());
         } catch (NoExisteObjetoEnEsaRuta e) {
             System.out.println(e.getMessage());
@@ -197,7 +197,7 @@ public class Shell
 
 
 
-    public void ln(String strPath, String name)        // EXCEPCION: nombre ya existe en directorio
+    public void ln(String strPath, String name)
     {
         Directorio dirActual;
         Path path = new Path(strPath);
@@ -218,6 +218,10 @@ public class Shell
             else if(new Path(name).hasMoreDirectories())
             {
                 throw new NombreEnlaceNoValido("Nombre no válido: " + name);
+            }
+            else if(cwd.peek().contains(name))
+            {
+                throw new YaExisteEseNombre("Ya hay un nodo en la ruta con el nombre especificado: " + name);
             }
 
 
@@ -245,26 +249,15 @@ public class Shell
                 }
                 else if(dirActual.contains(nextPathName))
                 {
+                    Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
 
-                    if(dirActual.getItem(nextPathName) instanceof Directorio)
+                    if(nodo instanceof Directorio)
                     {
-                        cwdCopy.add((Directorio) dirActual.getItem(nextPathName));
-                    }
-                    else if(dirActual.getItem(nextPathName) instanceof Enlace)
-                    {
-                        Enlace enlace = (Enlace) dirActual.getItem(nextPathName);
-                        if(enlace.getTarget() instanceof Directorio)
-                        {
-                            cwdCopy.add((Directorio) enlace.getTarget());
-                        }
-                        else
-                        {
-                            throw new TargetNoEsDirectorio("El target del enlace no es un directorio: " + nextPathName);
-                        }
+                        cwdCopy.push((Directorio) nodo);
                     }
                     else
                     {
-                        throw new NoEsEnlaceNiDirectorio("El objeto especificado no es ni enlace ni directorio: " + dirActual.getItem(nextPathName));
+                        throw new NoEsDirectorio("El objeto especificado no es ni enlace ni directorio: " + nextPathName);
                     }
                 }
                 else
@@ -282,29 +275,20 @@ public class Shell
             // Hemos llegado al directorio en el que se encuentra el ultimo objeto de la direccion pasada (dirActual)
             if(dirActual.contains(targetName))
             {
-
                 Nodo target = dirActual.getItem(targetName); // se obtiene el objeto destino del enlace
                 Enlace enlace = new Enlace(name, cwd.peek(), target); // se crea el enlace
-
-                if(!cwd.peek().contains(name))
-                {
-                    cwd.peek().add(enlace); // se añade el enlace al directorio actual
-                }
-                else
-                {
-                    throw new YaExisteEseNombre("Ya hay un nodo en la ruta con el nombre especificado: " + name);
-                }
-                
+                cwd.peek().add(enlace); // se añade el enlace al directorio actual
             }
             else
             {
                 throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + strPath);
             }
-        } catch (TargetNoEsDirectorio e) {
+
+        } catch (YaExisteEseNombre e) {
             System.out.println(e.getMessage());
         } catch (NombreEnlaceNoValido e) {
             System.out.println(e.getMessage());
-        } catch (NoEsEnlaceNiDirectorio e) {
+        } catch (NoEsDirectorio e) {
             System.out.println(e.getMessage());
         } catch (NoExisteObjetoEnEsaRuta e) {
             System.out.println(e.getMessage());
@@ -337,7 +321,7 @@ public class Shell
 
 
             if(path.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
-            {   
+            {
                 cwdCopy.clear();
                 cwdCopy.add(root);
                 path.removeRootBar();
@@ -359,26 +343,15 @@ public class Shell
                 }
                 if (dirActual.contains(nextPathName))
                 {
-                    if(dirActual.getItem(nextPathName) instanceof Directorio)
-                    {
-                        cwdCopy.add((Directorio) dirActual.getItem(nextPathName));
+                    Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
 
-                    }
-                    else if(dirActual.getItem(nextPathName) instanceof Enlace)
+                    if(nodo instanceof Directorio)
                     {
-                        Enlace enlace = (Enlace) dirActual.getItem(nextPathName);
-                        if(enlace.getTarget() instanceof Directorio)
-                        {
-                            cwdCopy.add((Directorio) enlace.getTarget());
-                        }
-                        else
-                        {
-                            throw new TargetNoEsDirectorio("El target del enlace no es un directorio: " + nextPathName);
-                        }
+                        cwdCopy.push((Directorio) nodo);
                     }
                     else
                     {
-                        throw new NoEsEnlaceNiDirectorio("El objeto especificado no es ni enlace ni directorio: " + dirActual.getItem(nextPathName));
+                        throw new NoEsDirectorio("El objeto especificado no es directorio: " + nextPathName);
                     }
                 }
                 else
@@ -390,7 +363,7 @@ public class Shell
                 path.removeFirstDirectory();
             }
 
-            String targetName = path.getLastDirectory().getPathName();
+            String targetName = path.getPathName();
 
             // Hemos llegado al directorio en el que se encuentra el ultimo objeto de la direccion pasada (dirActual)
             if(!dirActual.contains(targetName))
@@ -400,10 +373,7 @@ public class Shell
             
             return dirActual.getItem(targetName).getSize();
 
-        } catch (TargetNoEsDirectorio e) {
-            System.out.println(e.getMessage());
-            
-        } catch (NoEsEnlaceNiDirectorio e) {
+        } catch (NoEsDirectorio e) {
             System.out.println(e.getMessage());
 
         } catch (NoExisteObjetoEnEsaRuta e) {
@@ -420,7 +390,6 @@ public class Shell
 
     public void rm (String strPath) {
         
-                
         Path rutaHastaNodo = new Path(strPath);
         Directorio dirActual;
 
@@ -454,25 +423,15 @@ public class Shell
     
                 if(dirActual.contains(nextPathName))
                 {
-                    if(dirActual.getItem(nextPathName) instanceof Directorio)
+                    Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
+
+                    if(nodo instanceof Directorio)
                     {
-                        cwdCopy.add((Directorio) dirActual.getItem(nextPathName));
-                    }
-                    else if(dirActual.getItem(nextPathName) instanceof Enlace)
-                    {
-                        Enlace enlace = (Enlace) dirActual.getItem(nextPathName);
-                        if(enlace.getTarget() instanceof Directorio)
-                        {
-                            cwdCopy.add((Directorio) enlace.getTarget());
-                        }
-                        else
-                        {
-                            throw new TargetNoEsDirectorio("El target del enlace no es un directorio: " + nextPathName);
-                        }
+                        cwdCopy.push((Directorio) nodo);
                     }
                     else
                     {
-                        throw new NoEsEnlaceNiDirectorio("El objeto especificado no es ni enlace ni directorio: " + dirActual.getItem(nextPathName));
+                        throw new NoEsDirectorio("El objeto especificado no es directorio: " + nextPathName);
                     }
                 }
                 else
@@ -515,14 +474,11 @@ public class Shell
                     }
                 }
             }
-
-        } catch (TargetNoEsDirectorio e) {
-            System.out.println(e.getMessage());
-
+            
         } catch (NoExisteObjetoEnEsaRuta e) {
             System.out.println(e.getMessage());
                
-        } catch (NoEsEnlaceNiDirectorio e){
+        } catch (NoEsDirectorio e){
             System.out.println(e.getMessage());
 
         } catch (Exception e) {
@@ -553,9 +509,23 @@ public class Shell
             stack.push(root);      // siempre tiene que haber mínimo un directorio root como base de la pila
         }
     }
+
+    private Nodo obtenerObjetoReal(Nodo n)
+    {
+        if (n instanceof Fichero || n instanceof Directorio)
+        {
+            return n;
+        }
+        else    // n es un Enlace
+        {
+            Enlace ln = (Enlace) n;
+            return obtenerObjetoReal(ln.target);
+        }
+    }
     
 
-    private int getSizeWithLimit(Nodo nodo, int limit) {
+    private int getSizeWithLimit(Nodo nodo, int limit)
+    {
         if (limit <= 0) {
             return 0; // Si se alcanza el límite de iteraciones, se devuelve 0
         }
@@ -572,6 +542,8 @@ public class Shell
 
     // post: la cima del cwd cuando acaba la función contiene nodoAEliminar
     //          y es el único elemento del la pila cwd que lo contiene
+
+    // FALTA: TENER EN CUENTA TAMBIÉN EL PATH ABSOLUTO DEL NODO A ELIMINAR
     private void moverADirectorioSeguroMasProximo(Nodo nodoAEliminar)
     {
         Stack<Directorio> colaAuxiliar = new Stack<Directorio>();
