@@ -27,6 +27,19 @@ public class Directorio extends Nodo
 
     @Override
     public int getSize() {
+        int res = getSize(15);
+
+        if(res == -1) // Error
+        {
+            return 0;
+        }
+        else
+        {
+            return res;
+        }
+
+
+        /*
         int res = 0;
 
         
@@ -35,6 +48,33 @@ public class Directorio extends Nodo
         }
 
         return res;
+        */
+    }
+
+    public int getSize(int limit) {
+
+        if(limit <= 0)
+        {
+            return -1;
+        }
+
+        int total = 0;
+        int res = 0;
+
+        for(Map.Entry<String, Nodo> archivo : content.entrySet()){
+            res = archivo.getValue().getSize(limit-1);
+
+            if(res == -1)
+            {
+                return res;
+            }
+            else
+            {
+                total += res;
+            }
+        }
+
+        return total;
     }
 
     public void add(Nodo n)

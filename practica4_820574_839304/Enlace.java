@@ -18,7 +18,27 @@ public class Enlace extends Nodo
     @Override
     public int getSize()
     {
-        return target.getSize();
+        int res = target.getSize(15);
+
+        if(res == -1) // Error
+        {
+            return 0;
+        }
+        else
+        {
+            return res;
+        }
+    }
+    
+    @Override
+    public int getSize(int limit)
+    {
+        if(limit <= 0)
+        {
+            return -1;
+        }
+
+        return target.getSize(limit-1);
     }
 
     public Nodo getTarget() {

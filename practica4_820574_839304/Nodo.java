@@ -23,7 +23,8 @@ abstract class Nodo
     }
 
     abstract public int getSize();
-    
+
+    abstract public int getSize(int limit);
     
     public String getName() {
         return name;

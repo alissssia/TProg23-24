@@ -232,8 +232,8 @@ public class Test {
             System.out.println("TestDU 4 correcto");
         }
 
-        // Prueba 5: du con un bucle de enlaces FALLO ESTREPITOSO, HAY QUE ARREGLARLO
-        /*shell.mkdir("dir2");
+        // Prueba 5: du con un bucle de enlaces y directorios
+        shell.mkdir("dir2");
         shell.ln("dir2", "enlace2");
         shell.cd("dir2");
         shell.ln("/enlace2", "enlace3");
@@ -247,7 +247,7 @@ public class Test {
         else
         {
             System.out.println("TestDU 5 correcto");
-        }*/
+        }
 
         System.out.print("\n");
     }

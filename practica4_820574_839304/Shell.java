@@ -45,10 +45,9 @@ public class Shell
 
     public String du() {
         String resList = "";
-        int controlBuclesInfinitos = 15; // Límite de iteraciones para evitar bucles infinitos
 
         for (Map.Entry<String, Nodo> archivo : cwd.peek().content.entrySet()) {
-            resList += archivo.getKey() + "\t" + String.valueOf(getSizeWithLimit(archivo.getValue(), controlBuclesInfinitos)) + "\n";
+            resList += archivo.getKey() + "\t" + String.valueOf(archivo.getValue().getSize()) + "\n";
         }
 
         
@@ -91,7 +90,7 @@ public class Shell
                 }
 
                 fich = new Fichero(name, cwd.peek(), size);
-                cwd.peek().add(fich);
+                cwd.peek().add(fich);  
             
             }
         }
@@ -503,6 +502,7 @@ public class Shell
         cwd.push(root);
     }
 
+
     private void goBackIfPossible(Stack<Directorio> stack)
     {
         stack.pop();
@@ -513,6 +513,7 @@ public class Shell
         }
     }
 
+    
     private Nodo obtenerObjetoReal(Nodo n)
     {
         if (n instanceof Fichero || n instanceof Directorio)
@@ -527,28 +528,12 @@ public class Shell
             
         }
     }
-    
 
-    private int getSizeWithLimit(Nodo nodo, int limit)
-    {
-        if (limit <= 0) {
-            return 0; // Si se alcanza el límite de iteraciones, se devuelve 0
-        }
-
-        if (nodo instanceof Enlace) {
-            Enlace enlace = (Enlace) nodo;
-            return getSizeWithLimit(enlace.getTarget(), limit - 1); // Reducir el límite en 1 y continuar la recursión
-        } else {
-            return nodo.getSize(); // Si no es un enlace, se devuelve el tamaño normal del nodo
-        }
-    }
 
 
 
     // post: la cima del cwd cuando acaba la función contiene nodoAEliminar
     //          y es el único elemento del la pila cwd que lo contiene
-
-    // FALTA: TENER EN CUENTA TAMBIÉN EL PATH ABSOLUTO DEL NODO A ELIMINAR
     private void moverADirectorioSeguroMasProximo(Nodo nodoAEliminar)
     {
         Stack<Directorio> pilaAuxiliar = new Stack<Directorio>();
@@ -574,7 +559,7 @@ public class Shell
                 }
 
                 cwd.push(pilaAuxiliar.pop());
-            }
+            }  
 
             
             

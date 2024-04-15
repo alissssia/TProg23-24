@@ -21,6 +21,12 @@ public class Fichero extends Nodo
         return size;
     }
 
+    @Override
+    public int getSize(int limit)
+    {
+        return size;
+    }
+
     public void setSize(int _size)
     {
         size = _size;
