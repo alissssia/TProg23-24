@@ -37,7 +37,7 @@ public class Shell
         // quitamos el ultimo salto de linea
         if(resList.length() > 0)
         {
-            resList.substring(0, resList.length() - 1);
+            resList = resList.substring(0, resList.length() - 1);
         }
 
         return resList;
@@ -55,8 +55,9 @@ public class Shell
          // quitamos el ultimo salto de linea
         if(resList.length() > 0)
         {
-            resList.substring(0, resList.length() - 1);
+            resList = resList.substring(0, resList.length() - 1);
         }
+
         
 
         return resList;
@@ -68,19 +69,23 @@ public class Shell
         try {
             if(cwd.contains(name)) // si existe el fichero
             {
+                System.out.println("El fichero ya existe");
                 Nodo nodo = obtenerObjetoReal(cwd.peek().getItem(name)); // por si fuera un enlace
 
-                if(!(nodo instanceof Fichero))
+                if(nodo instanceof Fichero)
                 {
+                    fich = (Fichero) nodo;
+                    fich.setSize(size);
+                    
+                }
+                else {
                     throw new NoEsFichero("Ya existe un nodo con el nombre, pero no es un fichero: "+ name);
                 }
-
-                fich = (Fichero) nodo;
-                fich.setSize(size);
                 
             }
             else // si no existe se crea con ese tamaño
             {
+                System.out.println("Creando fichero");
                 
                 if(new Path(name).hasMoreDirectories())
                 {
@@ -229,7 +234,7 @@ public class Shell
             if(path.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
             {
                 cwdCopy.clear();
-                cwdCopy.add(root);
+                cwdCopy.push(root);
                 path.removeRootBar();
             }
             
@@ -323,7 +328,7 @@ public class Shell
             if(path.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
             {
                 cwdCopy.clear();
-                cwdCopy.add(root);
+                cwdCopy.push(root);
                 path.removeRootBar();
             }
             
@@ -411,7 +416,7 @@ public class Shell
             if(rutaHastaNodo.isRootPath()) // si nos dan una ruta absoluta empezamos desde la raiz
             {
                 cwdCopy.clear();
-                cwdCopy.add(root);
+                cwdCopy.push(root);
                 rutaHastaNodo.removeRootBar();
             }
             
@@ -497,7 +502,7 @@ public class Shell
     private void returnToRootDir()
     {
         cwd.clear();
-        cwd.add(root);
+        cwd.push(root);
     }
 
     private void goBackIfPossible(Stack<Directorio> stack)
@@ -515,11 +520,13 @@ public class Shell
         if (n instanceof Fichero || n instanceof Directorio)
         {
             return n;
+            
         }
         else    // n es un Enlace
         {
             Enlace ln = (Enlace) n;
             return obtenerObjetoReal(ln.target);
+            
         }
     }
     
@@ -546,13 +553,13 @@ public class Shell
     // FALTA: TENER EN CUENTA TAMBIÉN EL PATH ABSOLUTO DEL NODO A ELIMINAR
     private void moverADirectorioSeguroMasProximo(Nodo nodoAEliminar)
     {
-        Stack<Directorio> colaAuxiliar = new Stack<Directorio>();
+        Stack<Directorio> pilaAuxiliar = new Stack<Directorio>();
         boolean enlace = (nodoAEliminar instanceof Enlace);
         
         // metemos todos los directorios de cwd en 'orden inverso' en colaAuxiliar
         while(!cwd.empty()) 
         {
-            colaAuxiliar.add(cwd.pop());
+            pilaAuxiliar.push(cwd.pop());
         }
 
         boolean seguir = true;
@@ -561,14 +568,14 @@ public class Shell
         
         if(enlace)
         {
-            while(!colaAuxiliar.isEmpty() && seguir)
+            while(!pilaAuxiliar.isEmpty() && seguir)
             {
-                if(colaAuxiliar.peek().contains(nodoAEliminar))
+                if(pilaAuxiliar.peek().contains(nodoAEliminar))
                 {
                     seguir = false;
                 }
 
-                cwd.add(colaAuxiliar.pop());
+                cwd.push(pilaAuxiliar.pop());
             }
 
             
@@ -577,17 +584,17 @@ public class Shell
         }
         else // Directorio
         {
-            while(!colaAuxiliar.isEmpty() && seguir)
+            while(!pilaAuxiliar.isEmpty() && seguir)
             {
                 // si el siguiente directorio a introducir al cwd es el directorio a eliminar,
                 // paramos (nos quedamos en el inmediatamente anterior)
-                if(colaAuxiliar.peek().equals(nodoAEliminar))
+                if(pilaAuxiliar.peek().equals(nodoAEliminar))
                 {
                     seguir = false;
                 }
                 else    // si no lo es, lo introducimos al cwd
                 {
-                    cwd.add(colaAuxiliar.pop());
+                    cwd.push(pilaAuxiliar.pop());
                 }
             }
         }
