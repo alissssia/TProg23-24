@@ -658,6 +658,247 @@ public class Test {
         {
             System.out.println("TestLN 11 correcto");
         }
+
+        System.out.print("\n");
+    }
+
+    public static void testSTAT(Shell shell) {
+        System.out.println("Tests para probar el comando ln:");
+        System.out.println("==================================");
+
+        String expected;
+        int result;
+
+        // Prueba 1: stat con un fichero que no existe
+        result = shell.stat("fich1.txt");
+        if (result != 0) 
+        {
+            System.out.println("Error en testSTAT 1: el fichero no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestSTAT 1 correcto");
+        }
+
+        // Prueba 2: stat con un fichero que ya existe
+        shell.vi("fich1.txt", 100);
+        result = shell.stat("fich1.txt");
+        if (result != 100) 
+        {
+            System.out.println("Error en testSTAT 2: resultado = " + result + ", esperado = 100");
+        }
+        else
+        {
+            System.out.println("TestSTAT 2 correcto");
+        }
+
+        // Prueba 3: stat con un enlace que ya existe
+        shell.ln("fich1.txt", "enlace1");
+        result = shell.stat("enlace1");
+        if (result != 100) 
+        {
+            System.out.println("Error en testSTAT 3: resultado = " + result + ", esperado = 100");
+        }
+        else
+        {
+            System.out.println("TestSTAT 3 correcto");
+        }
+
+        // Prueba 4: stat con un directorio
+        shell.mkdir("dir1");
+        result = shell.stat("dir1");
+        if (result != 0) 
+        {
+            System.out.println("Error en testSTAT 4: resultado = " + result + ", esperado = 0");
+        }
+        else
+        {
+            System.out.println("TestSTAT 4 correcto");
+        }
+
+        // Prueba 5: stat con un directorio lleno
+        shell.cd("dir1");
+        shell.vi("fich2.txt", 200);
+        shell.vi("fich3.txt", 300);
+        shell.cd("..");
+        result = shell.stat("dir1");
+        if (result != 500) 
+        {
+            System.out.println("Error en testSTAT 5: resultado = " + result + ", esperado = 500");
+        }
+        else
+        {
+            System.out.println("TestSTAT 5 correcto");
+        }
+
+        // Prueba 6: stat con ruta absoluta
+        shell.cd("dir1");
+        result = shell.stat("/dir1/fich2.txt");
+        if (result != 200) 
+        {
+            System.out.println("Error en testSTAT 6: resultado = " + result + ", esperado = 200");
+        }
+        else
+        {
+            System.out.println("TestSTAT 6 correcto");
+        }
+
+        // Prueba 7: stat con ruta absoluta que termina con /
+        result = shell.stat("/dir1/");
+        if (result != 0) 
+        {
+            System.out.println("Error en testSTAT 7: resultado = " + result + ", esperado = 500");
+        }
+        else
+        {
+            System.out.println("TestSTAT 7 correcto");
+        }
+
+        // Prueba 8: stat con ruta absoluta que contiene con //
+        result = shell.stat("//dir1");
+        if (result != 0) 
+        {
+            System.out.println("Error en testSTAT 8: resultado = " + result + ", esperado = 500");
+        }
+        else
+        {
+            System.out.println("TestSTAT 8 correcto");
+        }
+
+        // Prueba 9: stat con un enlace incorrecto
+        result = shell.stat("dir1/fich4.txt/enlace2");
+        if (result != 0) 
+        {
+            System.out.println("Error en testSTAT 9: resultado = " + result + ", esperado = 0");
+        }
+        else
+        {
+            System.out.println("TestSTAT 9 correcto");
+        }
+
+        System.out.print("\n");
+    }
+
+    public static void testRM(Shell shell) {
+        System.out.println("Tests para probar el comando rm:");
+        System.out.println("==================================");
+
+        String expected;
+        String result;
+
+        // Prueba 1: rm con un fichero que no existe
+        shell.rm("fich1.txt");
+        if (shell.ls().contains("fich1.txt")) 
+        {
+            System.out.println("Error en testRM 1: el fichero no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 1 correcto");
+        }
+
+        // Prueba 2: rm con un fichero que ya existe
+        shell.vi("fich1.txt", 100);
+        shell.rm("fich1.txt");
+        if (shell.ls().contains("fich1.txt")) 
+        {
+            System.out.println("Error en testRM 2: el fichero no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 2 correcto");
+        }
+
+        // Prueba 3: rm con un enlace que ya existe
+        shell.ln("fich1.txt", "enlace1");
+        shell.rm("enlace1");
+        if (shell.ls().contains("enlace1")) 
+        {
+            System.out.println("Error en testRM 3: el enlace no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 3 correcto");
+        }
+
+        // Prueba 4: rm con un directorio vacio
+        shell.mkdir("dir1");
+        shell.rm("dir1");
+        if (shell.ls().contains("dir1")) 
+        {
+            System.out.println("Error en testRM 4: el directorio no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 4 correcto");
+        }
+
+        // Prueba 5: rm con un directorio lleno
+        shell.cd("dir1");
+        shell.vi("fich2.txt", 200);
+        shell.vi("fich3.txt", 300);
+        shell.cd("..");
+        shell.rm("dir1");
+        if (shell.ls().contains("dir1")) 
+        {
+            System.out.println("Error en testRM 5: el directorio no deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 5 correcto");
+        }
+
+        // Prueba 6: rm de un directorio en el path actual y vuelta a root
+        shell.mkdir("dir1");
+        shell.cd("dir1");
+        shell.rm("/dir1");
+        if (shell.pwd().equals("/")) {
+            System.out.println("TestRM 6 correcto");
+        }
+        else
+        {
+            System.out.println("Error en testRM 6: el directorio actual deberia ser /");
+        }
+
+        // Prueba 7: rm de un directorio en el path actual y vuelta al primer directorio que no se vaya a borrar
+        shell.mkdir("dir2");
+        shell.cd("dir2");
+        shell.mkdir("dir3");
+        shell.cd("dir3");
+        shell.mkdir("dir4");
+        shell.cd("dir4");
+        shell.rm("/dir2/dir3");
+        if (shell.pwd().equals("/dir2")) {
+            System.out.println("TestRM 7 correcto");
+        }
+        else
+        {
+            System.out.println("Error en testRM 7: el directorio actual deberia ser /dir2");
+        }
+
+        // Prueba 8: rm pero el path termina con /
+        shell.cd("..");
+        shell.rm("/dir2/");
+        if (!shell.ls().contains("dir2")) 
+        {
+            System.out.println("Error en testRM 8: el directorio deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 8 correcto");
+        }
+
+        // Prueba 9: rm pero el path contiene //
+        shell.mkdir("dir5");
+        shell.rm("//dir5");
+        if (!shell.ls().contains("dir5")) 
+        {
+            System.out.println("Error en testRM 9: el directorio deberia existir");
+        }
+        else
+        {
+            System.out.println("TestRM 9 correcto");
+        }
     }
 
     public static void main(String[] argv)
@@ -682,5 +923,11 @@ public class Test {
 
         Shell shell7 = new Shell();
         testLN(shell7);
+
+        Shell shell8 = new Shell();
+        testSTAT(shell8);
+
+        Shell shell9 = new Shell();
+        testRM(shell9);
     }
 }
