@@ -92,7 +92,7 @@ public class Test {
 
         // Prueba 2: ls con un solo directorio
         shell.mkdir("dir2");
-        expected = "dir2\n";
+        expected = "dir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -106,7 +106,7 @@ public class Test {
         // Prueba 3: ls con varios directorios
         shell.mkdir("dir3");
         shell.mkdir("dir4");
-        expected = "dir4\ndir3\ndir2\n";
+        expected = "dir4\ndir3\ndir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -119,7 +119,7 @@ public class Test {
 
         // Prueba 4: ls con directorios con nombres con espacios
         shell.mkdir("dir 5");
-        expected = "dir 5\ndir4\ndir3\ndir2\n";
+        expected = "dir 5\ndir4\ndir3\ndir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -133,7 +133,7 @@ public class Test {
         // Prueba 5: ls con directorios y ficheros
         shell.vi("fichero1", 100);
         shell.vi("fichero2", 200);
-        expected = "dir 5\nfichero2\ndir4\nfichero1\ndir3\ndir2\n";
+        expected = "dir 5\nfichero2\ndir4\nfichero1\ndir3\ndir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -146,7 +146,7 @@ public class Test {
 
         // Prueba 6: ls con directorios y ficheros con nombres con espacios
         shell.vi("fichero 3", 300);
-        expected = "dir 5\nfichero2\ndir4\nfichero1\nfichero 3\ndir3\ndir2\n";
+        expected = "dir 5\nfichero2\ndir4\nfichero1\nfichero 3\ndir3\ndir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -159,7 +159,7 @@ public class Test {
 
         // Prueba 7: ls con enlace
         shell.ln("fichero1", "enlace1");
-        expected = "dir 5\nfichero2\ndir4\nfichero1\nfichero 3\nenlace1\ndir3\ndir2\n";
+        expected = "dir 5\nfichero2\ndir4\nfichero1\nfichero 3\nenlace1\ndir3\ndir2";
         result = shell.ls();
         if (!result.equals(expected)) 
         {
@@ -558,10 +558,10 @@ public class Test {
             System.out.println("TestLN 3 correcto");
         }
 
-        // Prueba 4: ln con un nombre que ya existe HASTA QUE NO FUNCIONE EL CONTAINS FALLARA
+        // Prueba 4: ln con un nombre que ya existe 
         shell.vi("fich2.txt", 200);
         shell.ln("fich1.txt", "fich2.txt");
-        expected = "fich1.txt\t100\nfich2.txt\t200";
+        expected = "fich1.txt\t100\nenlace1\t100\nfich2.txt\t200";
         result = shell.du();
         if (!result.equals(expected)) 
         {

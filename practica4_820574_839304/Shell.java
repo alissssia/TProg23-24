@@ -67,9 +67,8 @@ public class Shell
     {
         Fichero fich;
         try {
-            if(cwd.contains(name)) // si existe el fichero
+            if(cwd.peek().contains(name)) // si existe el fichero
             {
-                System.out.println("El fichero ya existe");
                 Nodo nodo = obtenerObjetoReal(cwd.peek().getItem(name)); // por si fuera un enlace
 
                 if(nodo instanceof Fichero)
@@ -85,7 +84,6 @@ public class Shell
             }
             else // si no existe se crea con ese tamaño
             {
-                System.out.println("Creando fichero");
                 
                 if(new Path(name).hasMoreDirectories())
                 {
