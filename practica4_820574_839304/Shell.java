@@ -311,7 +311,7 @@ public class Shell
         cwdCopy.addAll(cwd);
 
         try {
-
+            // comentar si usamos la funcion auxiliar /*
             if(path.endsWithBar())
             {
                 throw new NombreRutaNoValido("El camino especificado no es válido porque termina en '/': " + strPath);
@@ -330,7 +330,8 @@ public class Shell
             }
             
             dirActual = cwdCopy.peek();
-
+            // Directorio dirFinal = obtenerDirectorioFinal(strPath); // esto es para llamar a la funcion auxiliar
+             
             while(path.hasMoreDirectories()) // mientras haya más directorios en el camino
             {
                 String nextPathName = path.getFirstDirectory();
@@ -363,8 +364,9 @@ public class Shell
                 
                 dirActual = cwdCopy.peek();
                 path.removeFirstDirectory();
-            }
+            } // */ // comentar si no usamos la funcion
 
+            // String targetName = dirFinal.getName(); // esto es para llamar a la funcion auxiliar
             String targetName = path.getPathName();
 
             // Hemos llegado al directorio en el que se encuentra el ultimo objeto de la direccion pasada (dirActual)
@@ -494,6 +496,64 @@ public class Shell
 
     // -----------------------------------------------------------------------------------
 
+    // Método para obtener el directorio que contiene el último objeto de la ruta especificada
+    private Directorio obtenerDirectorioFinal(String strPath) throws NoExisteObjetoEnEsaRuta, NoEsDirectorio {
+        Path path = new Path(strPath);
+        Directorio dirActual;
+
+        Stack<Directorio> cwdCopy = new Stack<>();
+        cwdCopy.addAll(cwd);
+
+        try {
+            if (path.endsWithBar()) {
+                throw new NombreRutaNoValido("El camino especificado no es válido porque termina en '/': " + strPath);
+            } else if (path.hasDoubleBar()) {
+                throw new NombreRutaNoValido("El camino especificado no es válido porque contiene '//': " + strPath);
+            }
+
+            if (path.isRootPath()) {
+                cwdCopy.clear();
+                cwdCopy.push(root);
+                path.removeRootBar();
+            }
+
+            dirActual = cwdCopy.peek();
+
+            while (path.hasMoreDirectories()) {
+                String nextPathName = path.getFirstDirectory();
+
+                if (nextPathName.equals(".")) {
+                    // No hace nada
+                } else if (nextPathName.equals("..")) {
+                    goBackIfPossible(cwdCopy);
+                } else if (dirActual.contains(nextPathName)) {
+                    Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
+
+                    if (nodo instanceof Directorio) {
+                        cwdCopy.push((Directorio) nodo);
+                    } else {
+                        throw new NoEsDirectorio("El objeto especificado no es directorio: " + nextPathName);
+                    }
+                } else {
+                    throw new NoExisteObjetoEnEsaRuta("El camino especificado no existe: " + strPath);
+                }
+
+                dirActual = cwdCopy.peek();
+                path.removeFirstDirectory();
+            }
+
+            return dirActual;
+
+        } catch (NoEsDirectorio e) {
+            System.out.println(e.getMessage());
+        } catch (NoExisteObjetoEnEsaRuta e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+ 
     
 
     private void returnToRootDir()

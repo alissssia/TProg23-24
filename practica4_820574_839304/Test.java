@@ -663,7 +663,7 @@ public class Test {
     }
 
     public static void testSTAT(Shell shell) {
-        System.out.println("Tests para probar el comando ln:");
+        System.out.println("Tests para probar el comando stat:");
         System.out.println("==================================");
 
         String expected;
