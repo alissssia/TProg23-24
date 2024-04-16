@@ -343,7 +343,7 @@ public class Shell
                 {
                     goBackIfPossible(cwdCopy); // vuelve al padre si es posible
                 }
-                if (dirActual.contains(nextPathName))
+                else if (dirActual.contains(nextPathName))
                 {
                     Nodo nodo = obtenerObjetoReal(dirActual.getItem(nextPathName));
 
@@ -366,6 +366,7 @@ public class Shell
             }
 
             String targetName = path.getPathName();
+
 
             // Hemos llegado al directorio en el que se encuentra el ultimo objeto de la direccion pasada (dirActual)
             if(!dirActual.contains(targetName))
