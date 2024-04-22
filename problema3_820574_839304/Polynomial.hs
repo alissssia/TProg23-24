@@ -15,8 +15,8 @@ peval (Poly coef) n = foldr (\x y -> x + n*y) 0 coef
 
 --Funcion para calcular la derivada de un polinomio
 pderv :: Polynomial -> Polynomial
+pderv (Poly []) = Poly ([0])
 pderv (Poly coef) = Poly (reverse (zipWith (*) (tail coef) [1..]))
-
 
 
 --Funcion para sumar dos polinomios
@@ -31,11 +31,16 @@ main = do
     putStrLn "Pruebas de la implementación de polinomios en Haskell:"
     putStrLn "Polinomio 1: 2x^2 + 0x + 1"
     putStrLn "Polinomio 2: 3x^2 + 4x + 1"
+    putStrLn "Polinomio 3: 6x + 2"
     let poly1 = makePoly [1, 0, 2]
         poly2 = makePoly [1, 4, 3]
+        poly3 = makePoly [2, 6]
         point = 2
     putStrLn $ "Evaluación del polinomio 1 en x=" ++ show point ++ ": " ++ show (peval poly1 point)
     putStrLn $ "Evaluación del polinomio 2 en x=" ++ show point ++ ": " ++ show (peval poly2 point)
-    putStrLn $ "Suma de polinomios: " ++ show (padd poly1 poly2)
+    putStrLn $ "Evaluación del polinomio 3 en x=" ++ show point ++ ": " ++ show (peval poly3 point)
+    putStrLn $ "Suma de polinomios 1 y 2: " ++ show (padd poly1 poly2)
+    putStrLn $ "Suma de polinomios 2 y 3: " ++ show (padd poly2 poly3)
     putStrLn $ "Derivada del polinomio 1: " ++ show (pderv poly1)
     putStrLn $ "Derivada del polinomio 2: " ++ show (pderv poly2)
+    putStrLn $ "Derivada del polinomio 3: " ++ show (pderv poly2)
