@@ -11,6 +11,7 @@ makePoly coeficientes = Poly coeficientes
 peval :: Polynomial -> Double -> Double
 peval (Poly []) _ = 0
 peval (Poly coef) n = foldr (\x y -> x + n*y) 0 (reverse coef)
+                        --o con foldl no hace falta hacer reverse
 
 
 --Funcion para calcular la derivada de un polinomio
@@ -29,7 +30,7 @@ sumLists [] [] = []
 sumLists l1 [] = l1
 sumLists [] l2 = l2
 sumLists (p1:l1) (p2:l2) = p1+p2 : sumLists l1 l2
-
+        --se puede poner p@(p1:l1)
 
 -- Función para ejecutar pruebas
 main :: IO ()
