@@ -32,6 +32,26 @@ charToMove c = Forward
 
 --------------------- PARTE 2 ---------------------
 
+rulesKoch :: Char -> String
+rulesKoch 'F' = "F+F--F+F"
+rulesKoch c = [c]
+
+
+rulesKochSquare :: Char -> String
+rulesKochSquare 'F' = "F+F-F-F+F"
+rulesKochSquare c = [c]
+
+
+rulesKochSnowflake :: Char -> String
+rulesKochSnowflake 'F' = "F-F++F-F"
+rulesKochSnowflake c = [c]
+
+
+rulesMinkowski :: Char -> String
+rulesMinkowski 'F' = "F+F-F-FF+F+F-F"
+rulesMinkowski c = [c]
+
+
 rulesArrowhead :: Char -> String
 rulesArrowhead 'F' = "G-F-G"
 rulesArrowhead 'G' = "F+G+F"
@@ -42,6 +62,13 @@ rulesHilbert :: Char -> String
 rulesHilbert 'f' = "-g>+f>f+>g-"
 rulesHilbert 'g' = "+f>-g>g->f+"
 rulesHilbert c = [c]
+
+
+rulesGosper :: Char -> String
+rulesGosper 'F' = "F-G--G+F++FF+G-"
+rulesGosper 'G' = "+F-GG--G-F++F+G"
+rulesGosper c = [c]
+
 
 
 
