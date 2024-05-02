@@ -1,0 +1,40 @@
+SOLO HAY QUE ENTREGAR EL MÓDULO BinaryTree.hs PERO HAY QUE METERLO EN ZIP IGUALMENTE
+
+para poder imprimir el tipo de dato
+	      vvvvvv
+instance (Show t) =>	Show (Tree t) where
+				show = [    implementar    ]
+					where
+						showAux1=
+						...
+
+            
+al hacer print, el arbol empty no tiene datos, así que
+        print $ empty
+no funcionará. Hay que hacer
+        print $ (empty::Tree Int)
+o
+        print $ (empty::Tree ())
+
+para el arbol de busqueda, el tipo de datos tendrá que
+derivar de Ord (heredada de Eq) para poder comparar sus datos
+(la clase Eq solo permite = y !=, y queremos <, >, <=, >=, ...)
+
+add::(Ord a) => Tree -> a -> Tree
+
+
+al hacer la operación buildBalanced, si al coger el elemento central
+hay elementos repetidos a su izquierda, hay que coger como centro el
+repetido más a la izquierda (probar con ejemplo (1,5,5,5,9), cuya raiz
+deberá ser el primer 5 (posición 2), con el 1 a la izq y 5-5-9 a la derecha)
+
+
+función balanced puede hacerse recorriendo el árbol, sacando así una lista
+con sus elementos, y así podemos construir el nuevo arbol 'desde cero' con
+buildBalanced
+
+función between ha de implementarse recorriendo el árbol y evitando recorrer
+ramas que no tiene sentido seguir recorriendo (habrá que balancear el árbol)
+y recorrer el nuevo arbol, metiendo las raíces en la lista hasta que es mayor
+que el máximo o menor que el mínimo
+
