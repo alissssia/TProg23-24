@@ -26,7 +26,7 @@ add::(Ord a) => Tree -> a -> Tree
 al hacer la operación buildBalanced, si al coger el elemento central
 hay elementos repetidos a su izquierda, hay que coger como centro el
 repetido más a la izquierda (probar con ejemplo (1,5,5,5,9), cuya raiz
-deberá ser el primer 5 (posición 2), con el 1 a la izq y 5-5-9 a la derecha)
+deberá ser el primer 5 (posición 2), con el 1 a la izq y 5-9-5 a la derecha)
 
 
 función balanced puede hacerse recorriendo el árbol, sacando así una lista
