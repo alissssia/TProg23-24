@@ -1,6 +1,4 @@
-module Main where
-
-import Data.String
+module BinaryTree where
 
 data Tree t = BuildTree t (Tree t) (Tree t) | Leaf t | Empty
 
@@ -30,30 +28,3 @@ instance (Show t) => Show (Tree t) where
             showTabbed i Empty = (tab i) ++ "()\n"
             showTabbed i (Leaf t) = (tab i) ++ (show t) ++ "\n"
             showTabbed i (BuildTree t it dt) = (tab i)++(show t)++"\n"++(showTabbed (i+1) it)++(showTabbed (i+1) dt)
-
-main :: IO ()
-main = do
-    let tVacio = (empty::Tree ())
-        t1 = (tree 1 (tree 2 (leaf 3) (leaf 4)) (tree 5 empty (leaf 6)))
-        t2 = (tree "R" (tree "HI" (leaf "NII") (leaf "NID")) (tree "HD" (leaf "NDI") (leaf "NDD")))
-    
-    putStrLn ""
-    putStrLn "======================================"
-    putStrLn " Árbol vacío:"
-    putStrLn "-------------"
-    putStrLn $ show tVacio
-    putStrLn $ "size: " ++ show (size tVacio)
-    putStrLn "======================================"
-
-    putStrLn "Árbol test 1:"
-    putStrLn "-------------"
-    putStrLn $ show t1
-    putStrLn $ "size: " ++ show (size t1)
-    putStrLn "======================================"
-
-    
-    putStrLn "Árbol test 2:"
-    putStrLn "-------------"
-    putStrLn $ show t2
-    putStrLn $ "size: " ++ show (size t2)
-    putStrLn "======================================"
