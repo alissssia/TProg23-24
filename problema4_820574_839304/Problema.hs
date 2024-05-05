@@ -48,7 +48,7 @@ instance Show ArbolFamiliar where
 
 youngest :: ArbolFamiliar -> Personaje
 youngest (ArbolFamiliar personaje []) = personaje -- si no tiene hijos, el personaje es el más joven
-youngest (ArbolFamiliar personaje hijos) = 
+youngest (ArbolFamiliar personaje hijos) =
     let
         hijosYoungest = map youngest hijos
         masJoven = maximum (personaje : hijosYoungest)

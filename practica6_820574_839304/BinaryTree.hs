@@ -52,6 +52,8 @@ build ts = (buildOnce empty ts)
             buildOnce t (x:ts) = buildOnce (add t x) ts
 
 
+----------------  PARTE 3 ----------------
+
 buildBalanced :: (Ord t) => [t] -> Tree t
 buildBalanced [] = empty
 buildBalanced [ts] = Leaf ts
@@ -70,5 +72,44 @@ buildBalanced ts = (BuildTree te (buildBalanced ta) (buildBalanced tb))
                         moveRepeats (as,e,bs) = if ((last as) == e) then (moveRepeats ((init as),e,e:bs))
                                                                         else (as,e,bs)
 
+
+----------------  PARTE 4 ----------------
+
+preorder :: Tree t -> [t]
+preorder Empty = []
+preorder (Leaf t) = [t]
+preorder (BuildTree t it dt) = [t] ++ (preorder it) ++ (preorder dt)
                 
-                
+postorder :: Tree t -> [t]
+postorder Empty = []
+postorder (Leaf t) = [t]
+postorder (BuildTree t it dt) = (postorder it) ++ (postorder dt) ++ [t]
+
+inorder :: Tree t -> [t]
+inorder Empty = []
+inorder (Leaf t) = [t]
+inorder (BuildTree t it dt) = (inorder it) ++ [t] ++ (inorder dt)
+
+
+balance :: (Ord t) => Tree t -> Tree t
+balance t = (buildBalanced (inorder t))
+
+
+----------------  PARTE 5 ----------------
+
+between :: (Ord t) => Tree t -> t -> t -> [t]
+between t xmin xmax = (betweenOrdered (balance t) xmin xmax)
+    where
+        betweenOrdered :: (Ord t) => Tree t -> t -> t -> [t]
+        betweenOrdered Empty _ _ = []
+        betweenOrdered (Leaf t) xmin xmax = if (t >= xmin && t <= xmax) then [t]
+                                                                 else []
+        betweenOrdered (BuildTree t it dt) xmin xmax = if (res == 0) then (sort ([t] ++ (betweenOrdered it xmin xmax) ++ (betweenOrdered dt xmin xmax))) -- si raíz está en el rango, buscamos en ambos lados
+                                        else if (res == -1) then (sort (betweenOrdered dt xmin xmax))                              -- si raíz no llega al rango, buscamos solo por la derecha (hijos izquierdos serán todavía menores)
+                                        else (sort (betweenOrdered it xmin xmax))                                                  -- si raíz se pasa del rango, buscamos solo por la izquierda (hijos derechos serán igual o mayores)
+            where
+                contains :: (Ord t) => t -> t -> t -> Int
+                contains t xmin xmax = if (t >= xmin && t <= xmax) then 0   -- si entra en el rango, 0
+                                    else if (t < xmin) then -1           -- si no llega al rango, -1
+                                    else 1                               -- si se pasa del rango, 1
+                res = (contains t xmin xmax)
