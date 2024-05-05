@@ -1,3 +1,7 @@
+-- Fichero: Problema.hs
+-- Autores: Alicia Lazaro Huerta (820574) y Manel Jorda Puig Rubio (839304)
+-- Fecha: 04/05/2024
+
 import Data.List (sort)
 
 data Era = BBY | ABY deriving (Show, Ord, Eq)
