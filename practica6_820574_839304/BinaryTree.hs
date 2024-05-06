@@ -56,22 +56,16 @@ build ts = (buildOnce empty ts)
 
 buildBalanced :: (Ord t) => [t] -> Tree t
 buildBalanced [] = empty
-buildBalanced [ts] = Leaf ts
+buildBalanced [ts] = leaf ts
 buildBalanced ts = (BuildTree te (buildBalanced ta) (buildBalanced tb))
     where
         sorted = (sort ts)
-        (ta,te,tb) = (split sorted)
-            where
-                split :: (Ord t) => [t] -> ([t],t,[t])
-                split xs = (moveRepeats(xa,b,xb))
-                    where
-                        l = (div (length xs) 2)
-                        (xa,(b:xb)) = (splitAt l xs)
-                        moveRepeats :: (Ord t) => ([t],t,[t]) -> ([t],t,[t])
-                        moveRepeats ([],e,b) = ([],e,b)
-                        moveRepeats (as,e,bs) = if ((last as) == e) then (moveRepeats ((init as),e,e:bs))
-                                                                        else (as,e,bs)
-
+        l = (div (length sorted) 2)
+        te = sorted!!l -- obtenemos el elemento que hay a la mitad
+        ta = (takeWhile (/= te) sorted) -- arbol izquierdo de elementos estrictamente menores que elemento central
+        tb = (drop 1 (dropWhile (< te) sorted)) -- arbol derecho de elementos igual o mayores que elemento central
+            -- quitamos el elemento central (situado en la primera posición) porque ya lo tenemos en 'te'
+            
 
 ----------------  PARTE 4 ----------------
 
