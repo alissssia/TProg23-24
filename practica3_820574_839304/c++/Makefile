@@ -1,10 +1,10 @@
 PROG:=main
-SRCS:=main.cc
+SRCS:=main.cpp
 
 CXX:=g++ -Wall -std=c++11
 
-OBJS:=$(SRCS:.cc=.o)
-DEPS:=$(SRCS:.cc=.d)
+OBJS:=$(SRCS:.cpp=.o)
+DEPS:=$(SRCS:.cpp=.d)
 
 all: $(PROG)
 
